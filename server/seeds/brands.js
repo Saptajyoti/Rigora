@@ -1,0 +1,41 @@
+export default [
+  [
+    'NVIDIA',
+    'Graphics technology for gaming and professional workloads.',
+    'https://www.nvidia.com',
+  ],
+  ['AMD', 'High-performance processors and graphics products.', 'https://www.amd.com'],
+  ['Intel', 'Desktop processors and platform technology.', 'https://www.intel.com'],
+  ['ASUS', 'Gaming-focused PC components and displays.', 'https://www.asus.com'],
+  ['MSI', 'Performance hardware for gaming systems.', 'https://www.msi.com'],
+  [
+    'Gigabyte',
+    'PC components, graphics cards, and motherboards.',
+    'https://www.gigabyte.com',
+  ],
+  ['Corsair', 'Memory, cooling, cases, and peripherals.', 'https://www.corsair.com'],
+  ['Kingston', 'Memory and storage for enthusiast systems.', 'https://www.kingston.com'],
+  ['Samsung', 'High-performance solid state storage.', 'https://www.samsung.com'],
+  ['Crucial', 'Memory and NVMe storage products.', 'https://www.crucial.com'],
+  [
+    'Western Digital',
+    'Reliable internal storage solutions.',
+    'https://www.westerndigital.com',
+  ],
+  ['NZXT', 'PC cases, liquid cooling, and accessories.', 'https://nzxt.com'],
+  [
+    'Cooler Master',
+    'Cooling, cases, and power solutions.',
+    'https://www.coolermaster.com',
+  ],
+  ['Logitech', 'Gaming mice, keyboards, and headsets.', 'https://www.logitechg.com'],
+  ['Razer', 'Premium gaming peripherals and laptops.', 'https://www.razer.com'],
+  ['Seagate', 'High-capacity desktop storage.', 'https://www.seagate.com'],
+  ['Lian Li', 'Premium PC chassis and cooling.', 'https://lian-li.com'],
+  ['AOC', 'High-refresh gaming monitors.', 'https://www.aoc.com'],
+].map(([name, description, website]) => ({
+  name,
+  description,
+  website,
+  isFeatured: ['NVIDIA', 'AMD', 'Intel', 'ASUS', 'Corsair', 'Logitech'].includes(name),
+}));

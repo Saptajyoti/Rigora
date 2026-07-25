@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+}
+
+@layer base {
+  :root {
+    --background: 225 33% 4%;
+    --foreground: 0 0% 98%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  .input {
+    @apply min-w-0 rounded-lg border border-white/10 bg-zinc-950 px-3 py-2.5 text-sm outline-none transition placeholder:text-zinc-600 focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20;
+  }
+}

@@ -35,7 +35,7 @@ export default function App() {
 
   const { user, isInitialized } = useSelector((state) => state.auth);
   const guestItems = useSelector((state) => state.store.guest);
-
+ 
   // Restore authenticated user on app load
   useEffect(() => {
     dispatch(fetchCurrentUser());

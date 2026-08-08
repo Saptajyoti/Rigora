@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
-import { imageUrl, money } from '../lib/catalog';
+import { imageUrl, money, useImageFallback } from '../lib/catalog';
 import { addToCart, toggleWishlist } from '../store/storeSlice';
 
 export default function ProductCard({ product }) {
@@ -60,6 +60,7 @@ export default function ProductCard({ product }) {
             <img
               src={imageUrl(product.images[0])}
               alt={product.name}
+              onError={useImageFallback}
               className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
             />
           ) : (

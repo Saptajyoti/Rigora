@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
-import { imageUrl } from '../lib/catalog';
+import { imageUrl, useImageFallback } from '../lib/catalog';
 import { useCatalogResources } from '../hooks/useCatalog';
 
 export default function Brands() {
@@ -25,6 +25,7 @@ export default function Brands() {
                   <img
                     src={imageUrl(brand.logo)}
                     alt={`${brand.name} logo`}
+                    onError={useImageFallback}
                     className="mb-5 h-10 max-w-32 object-contain object-left"
                   />
                 )}

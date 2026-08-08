@@ -1,4 +1,8 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import { existsSync } from 'node:fs';
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import mongoose from 'mongoose';
 import Brand from '../models/Brand.js';
 import Category from '../models/Category.js';
@@ -7,56 +11,99 @@ import brands from './brands.js';
 import categories from './categories.js';
 import productSeeds from './products.js';
 
+const seedDirectory = path.dirname(fileURLToPath(import.meta.url));
+const productDirectory = path.resolve(seedDirectory, '../../client/public/products');
+const manifestPath = path.join(seedDirectory, 'product-image-manifest.json');
+const fallbackImage = '/products/placeholder.png';
+
+dotenv.config({ path: path.resolve(seedDirectory, '../.env') });
+
+const writeImageManifest = async () => {
+  const manifest = productSeeds.map((product) => {
+    const publicPath = product.images?.[0] || fallbackImage;
+    const filename = path.basename(publicPath);
+
+    return {
+      name: product.name,
+      slug: product.slug,
+      filename,
+      publicPath,
+      exists: existsSync(path.join(productDirectory, filename)),
+      fallback: fallbackImage,
+    };
+  });
+
+  await mkdir(productDirectory, { recursive: true });
+  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+};
+
+const upsertByName = async (Model, records) => {
+  for (const record of records) {
+    const document = (await Model.findOne({ name: record.name })) || new Model();
+    Object.assign(document, record);
+    await document.save();
+  }
+};
+
 async function seed() {
+  await writeImageManifest();
+
+  if (process.argv.includes('--manifest-only')) {
+    console.log(
+      `Rigora product image manifest written: ${productSeeds.length} products.`,
+    );
+    return;
+  }
+
   if (!process.env.MONGODB_URI)
     throw new Error('MONGODB_URI must be set in server/.env.');
+
   await mongoose.connect(process.env.MONGODB_URI);
-  const clear = process.argv.includes('--clear');
-  if (clear)
+
+  if (process.argv.includes('--clear')) {
     await Promise.all([
       Product.deleteMany({}),
       Category.deleteMany({}),
       Brand.deleteMany({}),
     ]);
-  for (const categoryData of categories) {
-    const category =
-      (await Category.findOne({ name: categoryData.name })) || new Category();
-    Object.assign(category, categoryData);
-    await category.save();
   }
-  for (const brandData of brands) {
-    const brand = (await Brand.findOne({ name: brandData.name })) || new Brand();
-    Object.assign(brand, brandData);
-    await brand.save();
-  }
+
+  await upsertByName(Category, categories);
+  await upsertByName(Brand, brands);
+
   const [categoryDocuments, brandDocuments] = await Promise.all([
-    Category.find(),
-    Brand.find(),
+    Category.find({}, { _id: 1, name: 1 }),
+    Brand.find({}, { _id: 1, name: 1 }),
   ]);
   const categoryIds = new Map(
     categoryDocuments.map((category) => [category.name, category._id]),
   );
   const brandIds = new Map(brandDocuments.map((brand) => [brand.name, brand._id]));
-  const products = productSeeds.map(({ category, brand, ...product }) => ({
-    ...product,
-    category: categoryIds.get(category),
-    brand: brandIds.get(brand),
-    sku: `RIG-${product.name
-      .replace(/[^A-Z0-9]/gi, '')
-      .slice(0, 18)
-      .toUpperCase()}`,
-  }));
-  if (products.some((product) => !product.category || !product.brand))
-    throw new Error('Seed data references an unknown category or brand.');
+  const products = productSeeds.map(({ category, brand, ...product }) => {
+    const categoryId = categoryIds.get(category);
+    const brandId = brandIds.get(brand);
+
+    if (!categoryId || !brandId)
+      throw new Error(
+        `Seed product "${product.name}" references an unknown ${
+          !categoryId ? 'category' : 'brand'
+        }.`,
+      );
+
+    return { ...product, category: categoryId, brand: brandId };
+  });
+
   for (const productData of products) {
     const product = (await Product.findOne({ sku: productData.sku })) || new Product();
     Object.assign(product, productData);
     await product.save();
   }
+
   console.log(
-    `Rigora catalog seeded: ${categoryDocuments.length} categories, ${brandDocuments.length} brands, ${products.length} products.`,
+    `Rigora catalog seed complete: ${categories.length} categories, ${brands.length} brands, ${products.length} products.`,
   );
 }
+
 seed()
   .catch((error) => {
     console.error('Catalog seed failed:', error.message);

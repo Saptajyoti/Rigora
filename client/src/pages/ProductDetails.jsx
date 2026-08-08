@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductGrid from '../components/ProductGrid';
 import SiteHeader from '../components/SiteHeader';
 import { useProducts } from '../hooks/useCatalog';
-import { imageUrl, money } from '../lib/catalog';
+import { imageUrl, money, useImageFallback } from '../lib/catalog';
 import { api } from '../lib/api';
 import { addToCart, toggleWishlist } from '../store/storeSlice';
 import { fetchProductReviews } from '../store/reviewSlice';
@@ -119,6 +119,7 @@ export default function ProductDetails() {
                   onClick={() => setZoomed(!zoomed)}
                   src={imageUrl(images[selectedImage])}
                   alt={product.name}
+                  onError={useImageFallback}
                   className={`aspect-square w-full cursor-zoom-in object-cover transition duration-300 ${zoomed ? 'scale-150' : ''}`}
                 />
               ) : (
@@ -148,6 +149,7 @@ export default function ProductDetails() {
                     <img
                       src={imageUrl(image)}
                       alt={`${product.name} ${index + 1}`}
+                      onError={useImageFallback}
                       className="h-full w-full object-cover"
                     />
                   </button>

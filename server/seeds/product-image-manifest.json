@@ -1,0 +1,658 @@
+[
+  {
+    "name": "NVIDIA GeForce RTX 4060 8GB",
+    "slug": "nvidia-geforce-rtx-4060-8gb",
+    "filename": "nvidia-geforce-rtx-4060-8gb.jpg",
+    "publicPath": "/products/nvidia-geforce-rtx-4060-8gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "NVIDIA GeForce RTX 4060 Ti 8GB",
+    "slug": "nvidia-geforce-rtx-4060-ti-8gb",
+    "filename": "nvidia-geforce-rtx-4060-ti-8gb.jpg",
+    "publicPath": "/products/nvidia-geforce-rtx-4060-ti-8gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "ASUS TUF Gaming GeForce RTX 4070 SUPER 12GB",
+    "slug": "asus-tuf-gaming-geforce-rtx-4070-super-12gb",
+    "filename": "asus-tuf-gaming-geforce-rtx-4070-super-12gb.jpg",
+    "publicPath": "/products/asus-tuf-gaming-geforce-rtx-4070-super-12gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "MSI GeForce RTX 4070 Ti SUPER Ventus 3X 16GB",
+    "slug": "msi-geforce-rtx-4070-ti-super-ventus-3x-16gb",
+    "filename": "msi-geforce-rtx-4070-ti-super-ventus-3x-16gb.jpg",
+    "publicPath": "/products/msi-geforce-rtx-4070-ti-super-ventus-3x-16gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Gigabyte GeForce RTX 4080 SUPER Gaming OC 16GB",
+    "slug": "gigabyte-geforce-rtx-4080-super-gaming-oc-16gb",
+    "filename": "gigabyte-geforce-rtx-4080-super-gaming-oc-16gb.jpg",
+    "publicPath": "/products/gigabyte-geforce-rtx-4080-super-gaming-oc-16gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "NVIDIA GeForce RTX 5070 12GB",
+    "slug": "nvidia-geforce-rtx-5070-12gb",
+    "filename": "nvidia-geforce-rtx-5070-12gb.jpg",
+    "publicPath": "/products/nvidia-geforce-rtx-5070-12gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "ASUS TUF Gaming GeForce RTX 5080 16GB",
+    "slug": "asus-tuf-gaming-geforce-rtx-5080-16gb",
+    "filename": "asus-tuf-gaming-geforce-rtx-5080-16gb.jpg",
+    "publicPath": "/products/asus-tuf-gaming-geforce-rtx-5080-16gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "MSI GeForce RTX 5090 Gaming Trio 32GB",
+    "slug": "msi-geforce-rtx-5090-gaming-trio-32gb",
+    "filename": "msi-geforce-rtx-5090-gaming-trio-32gb.jpg",
+    "publicPath": "/products/msi-geforce-rtx-5090-gaming-trio-32gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "AMD Radeon RX 7600 8GB",
+    "slug": "amd-radeon-rx-7600-8gb",
+    "filename": "amd-radeon-rx-7600-8gb.jpg",
+    "publicPath": "/products/amd-radeon-rx-7600-8gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Gigabyte Radeon RX 7700 XT Gaming OC 12GB",
+    "slug": "gigabyte-radeon-rx-7700-xt-gaming-oc-12gb",
+    "filename": "gigabyte-radeon-rx-7700-xt-gaming-oc-12gb.jpg",
+    "publicPath": "/products/gigabyte-radeon-rx-7700-xt-gaming-oc-12gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "ASRock Radeon RX 7800 XT Steel Legend 16GB",
+    "slug": "asrock-radeon-rx-7800-xt-steel-legend-16gb",
+    "filename": "asrock-radeon-rx-7800-xt-steel-legend-16gb.jpg",
+    "publicPath": "/products/asrock-radeon-rx-7800-xt-steel-legend-16gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "AMD Radeon RX 7900 XTX 24GB",
+    "slug": "amd-radeon-rx-7900-xtx-24gb",
+    "filename": "amd-radeon-rx-7900-xtx-24gb.jpg",
+    "publicPath": "/products/amd-radeon-rx-7900-xtx-24gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "ASRock Radeon RX 9070 XT Taichi 16GB",
+    "slug": "asrock-radeon-rx-9070-xt-taichi-16gb",
+    "filename": "asrock-radeon-rx-9070-xt-taichi-16gb.jpg",
+    "publicPath": "/products/asrock-radeon-rx-9070-xt-taichi-16gb.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "AMD Ryzen 5 7600",
+    "slug": "amd-ryzen-5-7600",
+    "filename": "amd-ryzen-5-7600.jpg",
+    "publicPath": "/products/amd-ryzen-5-7600.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "AMD Ryzen 7 7700X",
+    "slug": "amd-ryzen-7-7700x",
+    "filename": "amd-ryzen-7-7700x.jpg",
+    "publicPath": "/products/amd-ryzen-7-7700x.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "AMD Ryzen 7 7800X3D",
+    "slug": "amd-ryzen-7-7800x3d",
+    "filename": "amd-ryzen-7-7800x3d.jpg",
+    "publicPath": "/products/amd-ryzen-7-7800x3d.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "AMD Ryzen 7 9800X3D",
+    "slug": "amd-ryzen-7-9800x3d",
+    "filename": "amd-ryzen-7-9800x3d.jpg",
+    "publicPath": "/products/amd-ryzen-7-9800x3d.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "AMD Ryzen 9 9900X",
+    "slug": "amd-ryzen-9-9900x",
+    "filename": "amd-ryzen-9-9900x.jpg",
+    "publicPath": "/products/amd-ryzen-9-9900x.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "AMD Ryzen 9 9950X",
+    "slug": "amd-ryzen-9-9950x",
+    "filename": "amd-ryzen-9-9950x.jpg",
+    "publicPath": "/products/amd-ryzen-9-9950x.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Intel Core i5-14600K",
+    "slug": "intel-core-i5-14600k",
+    "filename": "intel-core-i5-14600k.jpg",
+    "publicPath": "/products/intel-core-i5-14600k.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Intel Core i7-14700K",
+    "slug": "intel-core-i7-14700k",
+    "filename": "intel-core-i7-14700k.jpg",
+    "publicPath": "/products/intel-core-i7-14700k.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Intel Core i9-14900K",
+    "slug": "intel-core-i9-14900k",
+    "filename": "intel-core-i9-14900k.jpg",
+    "publicPath": "/products/intel-core-i9-14900k.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Intel Core Ultra 7 265K",
+    "slug": "intel-core-ultra-7-265k",
+    "filename": "intel-core-ultra-7-265k.jpg",
+    "publicPath": "/products/intel-core-ultra-7-265k.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Intel Core Ultra 9 285K",
+    "slug": "intel-core-ultra-9-285k",
+    "filename": "intel-core-ultra-9-285k.jpg",
+    "publicPath": "/products/intel-core-ultra-9-285k.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "ASUS TUF Gaming B650-Plus WiFi",
+    "slug": "asus-tuf-gaming-b650-plus-wifi",
+    "filename": "asus-tuf-gaming-b650-plus-wifi.jpg",
+    "publicPath": "/products/asus-tuf-gaming-b650-plus-wifi.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "MSI MAG B650 Tomahawk WiFi",
+    "slug": "msi-mag-b650-tomahawk-wifi",
+    "filename": "msi-mag-b650-tomahawk-wifi.jpg",
+    "publicPath": "/products/msi-mag-b650-tomahawk-wifi.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Gigabyte B650 AORUS Elite AX",
+    "slug": "gigabyte-b650-aorus-elite-ax",
+    "filename": "gigabyte-b650-aorus-elite-ax.jpg",
+    "publicPath": "/products/gigabyte-b650-aorus-elite-ax.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "ASUS ROG Strix Z790-E Gaming WiFi",
+    "slug": "asus-rog-strix-z790-e-gaming-wifi",
+    "filename": "asus-rog-strix-z790-e-gaming-wifi.jpg",
+    "publicPath": "/products/asus-rog-strix-z790-e-gaming-wifi.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "MSI Z790 Gaming Plus WiFi",
+    "slug": "msi-z790-gaming-plus-wifi",
+    "filename": "msi-z790-gaming-plus-wifi.jpg",
+    "publicPath": "/products/msi-z790-gaming-plus-wifi.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Corsair Vengeance DDR5 32GB 6000MHz",
+    "slug": "corsair-vengeance-ddr5-32gb-6000mhz",
+    "filename": "corsair-vengeance-ddr5-32gb-6000mhz.jpg",
+    "publicPath": "/products/corsair-vengeance-ddr5-32gb-6000mhz.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Kingston Fury Beast DDR5 32GB 5600MHz",
+    "slug": "kingston-fury-beast-ddr5-32gb-5600mhz",
+    "filename": "kingston-fury-beast-ddr5-32gb-5600mhz.jpg",
+    "publicPath": "/products/kingston-fury-beast-ddr5-32gb-5600mhz.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Crucial Pro DDR5 32GB 5600MHz",
+    "slug": "crucial-pro-ddr5-32gb-5600mhz",
+    "filename": "crucial-pro-ddr5-32gb-5600mhz.jpg",
+    "publicPath": "/products/crucial-pro-ddr5-32gb-5600mhz.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Corsair Vengeance LPX DDR4 16GB 3200MHz",
+    "slug": "corsair-vengeance-lpx-ddr4-16gb-3200mhz",
+    "filename": "corsair-vengeance-lpx-ddr4-16gb-3200mhz.jpg",
+    "publicPath": "/products/corsair-vengeance-lpx-ddr4-16gb-3200mhz.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Samsung 990 Pro 1TB NVMe SSD",
+    "slug": "samsung-990-pro-1tb-nvme-ssd",
+    "filename": "samsung-990-pro-1tb-nvme-ssd.jpg",
+    "publicPath": "/products/samsung-990-pro-1tb-nvme-ssd.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Samsung 990 Pro 2TB NVMe SSD",
+    "slug": "samsung-990-pro-2tb-nvme-ssd",
+    "filename": "samsung-990-pro-2tb-nvme-ssd.jpg",
+    "publicPath": "/products/samsung-990-pro-2tb-nvme-ssd.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Western Digital Black SN850X 1TB NVMe SSD",
+    "slug": "western-digital-black-sn850x-1tb-nvme-ssd",
+    "filename": "western-digital-black-sn850x-1tb-nvme-ssd.jpg",
+    "publicPath": "/products/western-digital-black-sn850x-1tb-nvme-ssd.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Western Digital Black SN850X 2TB NVMe SSD",
+    "slug": "western-digital-black-sn850x-2tb-nvme-ssd",
+    "filename": "western-digital-black-sn850x-2tb-nvme-ssd.jpg",
+    "publicPath": "/products/western-digital-black-sn850x-2tb-nvme-ssd.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Crucial T500 1TB NVMe SSD",
+    "slug": "crucial-t500-1tb-nvme-ssd",
+    "filename": "crucial-t500-1tb-nvme-ssd.jpg",
+    "publicPath": "/products/crucial-t500-1tb-nvme-ssd.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Kingston KC3000 2TB NVMe SSD",
+    "slug": "kingston-kc3000-2tb-nvme-ssd",
+    "filename": "kingston-kc3000-2tb-nvme-ssd.jpg",
+    "publicPath": "/products/kingston-kc3000-2tb-nvme-ssd.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Seagate Barracuda 2TB HDD",
+    "slug": "seagate-barracuda-2tb-hdd",
+    "filename": "seagate-barracuda-2tb-hdd.jpg",
+    "publicPath": "/products/seagate-barracuda-2tb-hdd.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Corsair RM750e 750W Gold",
+    "slug": "corsair-rm750e-750w-gold",
+    "filename": "corsair-rm750e-750w-gold.jpg",
+    "publicPath": "/products/corsair-rm750e-750w-gold.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Corsair RM850x 850W Gold",
+    "slug": "corsair-rm850x-850w-gold",
+    "filename": "corsair-rm850x-850w-gold.jpg",
+    "publicPath": "/products/corsair-rm850x-850w-gold.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "MSI MAG A850GL 850W",
+    "slug": "msi-mag-a850gl-850w",
+    "filename": "msi-mag-a850gl-850w.jpg",
+    "publicPath": "/products/msi-mag-a850gl-850w.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Cooler Master MWE Gold 850 V2",
+    "slug": "cooler-master-mwe-gold-850-v2",
+    "filename": "cooler-master-mwe-gold-850-v2.jpg",
+    "publicPath": "/products/cooler-master-mwe-gold-850-v2.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "DeepCool PX1000G 1000W",
+    "slug": "deepcool-px1000g-1000w",
+    "filename": "deepcool-px1000g-1000w.jpg",
+    "publicPath": "/products/deepcool-px1000g-1000w.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "NZXT H5 Flow",
+    "slug": "nzxt-h5-flow",
+    "filename": "nzxt-h5-flow.jpg",
+    "publicPath": "/products/nzxt-h5-flow.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "NZXT H9 Flow",
+    "slug": "nzxt-h9-flow",
+    "filename": "nzxt-h9-flow.jpg",
+    "publicPath": "/products/nzxt-h9-flow.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Corsair 4000D Airflow",
+    "slug": "corsair-4000d-airflow",
+    "filename": "corsair-4000d-airflow.jpg",
+    "publicPath": "/products/corsair-4000d-airflow.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Corsair 5000D Airflow",
+    "slug": "corsair-5000d-airflow",
+    "filename": "corsair-5000d-airflow.jpg",
+    "publicPath": "/products/corsair-5000d-airflow.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Cooler Master TD500 Mesh",
+    "slug": "cooler-master-td500-mesh",
+    "filename": "cooler-master-td500-mesh.jpg",
+    "publicPath": "/products/cooler-master-td500-mesh.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "DeepCool AK400",
+    "slug": "deepcool-ak400",
+    "filename": "deepcool-ak400.jpg",
+    "publicPath": "/products/deepcool-ak400.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "DeepCool AK620",
+    "slug": "deepcool-ak620",
+    "filename": "deepcool-ak620.jpg",
+    "publicPath": "/products/deepcool-ak620.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Cooler Master Hyper 212 Halo",
+    "slug": "cooler-master-hyper-212-halo",
+    "filename": "cooler-master-hyper-212-halo.jpg",
+    "publicPath": "/products/cooler-master-hyper-212-halo.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Noctua NH-D15 chromax.black",
+    "slug": "noctua-nh-d15-chromaxblack",
+    "filename": "noctua-nh-d15-chromaxblack.jpg",
+    "publicPath": "/products/noctua-nh-d15-chromaxblack.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "NZXT Kraken 240",
+    "slug": "nzxt-kraken-240",
+    "filename": "nzxt-kraken-240.jpg",
+    "publicPath": "/products/nzxt-kraken-240.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Corsair iCUE H150i Elite",
+    "slug": "corsair-icue-h150i-elite",
+    "filename": "corsair-icue-h150i-elite.jpg",
+    "publicPath": "/products/corsair-icue-h150i-elite.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Corsair iCUE AF120 RGB Elite Triple Pack",
+    "slug": "corsair-icue-af120-rgb-elite-triple-pack",
+    "filename": "corsair-icue-af120-rgb-elite-triple-pack.jpg",
+    "publicPath": "/products/corsair-icue-af120-rgb-elite-triple-pack.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Cooler Master SickleFlow 120 ARGB Triple Pack",
+    "slug": "cooler-master-sickleflow-120-argb-triple-pack",
+    "filename": "cooler-master-sickleflow-120-argb-triple-pack.jpg",
+    "publicPath": "/products/cooler-master-sickleflow-120-argb-triple-pack.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Noctua NF-A12x25 PWM",
+    "slug": "noctua-nf-a12x25-pwm",
+    "filename": "noctua-nf-a12x25-pwm.jpg",
+    "publicPath": "/products/noctua-nf-a12x25-pwm.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "LG UltraGear 27GP850-B",
+    "slug": "lg-ultragear-27gp850-b",
+    "filename": "lg-ultragear-27gp850-b.jpg",
+    "publicPath": "/products/lg-ultragear-27gp850-b.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "ASUS TUF Gaming VG27AQ",
+    "slug": "asus-tuf-gaming-vg27aq",
+    "filename": "asus-tuf-gaming-vg27aq.jpg",
+    "publicPath": "/products/asus-tuf-gaming-vg27aq.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Acer Nitro XV272U",
+    "slug": "acer-nitro-xv272u",
+    "filename": "acer-nitro-xv272u.jpg",
+    "publicPath": "/products/acer-nitro-xv272u.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "BenQ MOBIUZ EX2710Q",
+    "slug": "benq-mobiuz-ex2710q",
+    "filename": "benq-mobiuz-ex2710q.jpg",
+    "publicPath": "/products/benq-mobiuz-ex2710q.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Logitech G502 X",
+    "slug": "logitech-g502-x",
+    "filename": "logitech-g502-x.jpg",
+    "publicPath": "/products/logitech-g502-x.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Logitech G Pro X Superlight 2",
+    "slug": "logitech-g-pro-x-superlight-2",
+    "filename": "logitech-g-pro-x-superlight-2.jpg",
+    "publicPath": "/products/logitech-g-pro-x-superlight-2.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Razer DeathAdder V3",
+    "slug": "razer-deathadder-v3",
+    "filename": "razer-deathadder-v3.jpg",
+    "publicPath": "/products/razer-deathadder-v3.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Logitech G Pro X TKL Lightspeed",
+    "slug": "logitech-g-pro-x-tkl-lightspeed",
+    "filename": "logitech-g-pro-x-tkl-lightspeed.jpg",
+    "publicPath": "/products/logitech-g-pro-x-tkl-lightspeed.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Razer BlackWidow V4",
+    "slug": "razer-blackwidow-v4",
+    "filename": "razer-blackwidow-v4.jpg",
+    "publicPath": "/products/razer-blackwidow-v4.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "HyperX Alloy Origins",
+    "slug": "hyperx-alloy-origins",
+    "filename": "hyperx-alloy-origins.jpg",
+    "publicPath": "/products/hyperx-alloy-origins.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "SteelSeries Apex Pro TKL",
+    "slug": "steelseries-apex-pro-tkl",
+    "filename": "steelseries-apex-pro-tkl.jpg",
+    "publicPath": "/products/steelseries-apex-pro-tkl.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "SteelSeries Arctis Nova 7",
+    "slug": "steelseries-arctis-nova-7",
+    "filename": "steelseries-arctis-nova-7.jpg",
+    "publicPath": "/products/steelseries-arctis-nova-7.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "HyperX Cloud III Wireless",
+    "slug": "hyperx-cloud-iii-wireless",
+    "filename": "hyperx-cloud-iii-wireless.jpg",
+    "publicPath": "/products/hyperx-cloud-iii-wireless.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Razer BlackShark V2 Pro",
+    "slug": "razer-blackshark-v2-pro",
+    "filename": "razer-blackshark-v2-pro.jpg",
+    "publicPath": "/products/razer-blackshark-v2-pro.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Logitech C920 HD Pro Webcam",
+    "slug": "logitech-c920-hd-pro-webcam",
+    "filename": "logitech-c920-hd-pro-webcam.jpg",
+    "publicPath": "/products/logitech-c920-hd-pro-webcam.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Razer Kiyo X",
+    "slug": "razer-kiyo-x",
+    "filename": "razer-kiyo-x.jpg",
+    "publicPath": "/products/razer-kiyo-x.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "TP-Link Archer AX55",
+    "slug": "tp-link-archer-ax55",
+    "filename": "tp-link-archer-ax55.jpg",
+    "publicPath": "/products/tp-link-archer-ax55.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "TP-Link Archer TX20U Plus USB Wi-Fi Adapter",
+    "slug": "tp-link-archer-tx20u-plus-usb-wi-fi-adapter",
+    "filename": "tp-link-archer-tx20u-plus-usb-wi-fi-adapter.jpg",
+    "publicPath": "/products/tp-link-archer-tx20u-plus-usb-wi-fi-adapter.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "TP-Link Deco X50 Mesh Wi-Fi 6",
+    "slug": "tp-link-deco-x50-mesh-wi-fi-6",
+    "filename": "tp-link-deco-x50-mesh-wi-fi-6.jpg",
+    "publicPath": "/products/tp-link-deco-x50-mesh-wi-fi-6.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "TP-Link TL-SG108 8-Port Gigabit Switch",
+    "slug": "tp-link-tl-sg108-8-port-gigabit-switch",
+    "filename": "tp-link-tl-sg108-8-port-gigabit-switch.jpg",
+    "publicPath": "/products/tp-link-tl-sg108-8-port-gigabit-switch.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "PCIe 4.0 x16 Riser Cable",
+    "slug": "pcie-40-x16-riser-cable",
+    "filename": "pcie-40-x16-riser-cable.jpg",
+    "publicPath": "/products/pcie-40-x16-riser-cable.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "Noctua NT-H2 Thermal Paste",
+    "slug": "noctua-nt-h2-thermal-paste",
+    "filename": "noctua-nt-h2-thermal-paste.jpg",
+    "publicPath": "/products/noctua-nt-h2-thermal-paste.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  },
+  {
+    "name": "ASUS ROG Herculx GPU Support Bracket",
+    "slug": "asus-rog-herculx-gpu-support-bracket",
+    "filename": "asus-rog-herculx-gpu-support-bracket.jpg",
+    "publicPath": "/products/asus-rog-herculx-gpu-support-bracket.jpg",
+    "exists": false,
+    "fallback": "/products/placeholder.png"
+  }
+]

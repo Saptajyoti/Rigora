@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import QuantitySelector from './QuantitySelector';
-import { imageUrl, money } from '../lib/catalog';
+import { imageUrl, money, useImageFallback } from '../lib/catalog';
 export default function CartItem({ item, onUpdate, onRemove }) {
   const product = item.product;
   return (
@@ -10,6 +10,7 @@ export default function CartItem({ item, onUpdate, onRemove }) {
           <img
             src={imageUrl(product.images[0])}
             alt=""
+            onError={useImageFallback}
             className="h-full w-full object-cover"
           />
         )}

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
-import { imageUrl } from '../lib/catalog';
+import { imageUrl, useImageFallback } from '../lib/catalog';
 import { useCatalogResources } from '../hooks/useCatalog';
 
 export default function Categories() {
@@ -26,6 +26,7 @@ export default function Categories() {
                     <img
                       src={imageUrl(category.image)}
                       alt=""
+                      onError={useImageFallback}
                       className="h-full w-full object-cover transition group-hover:scale-105"
                     />
                   )}

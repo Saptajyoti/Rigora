@@ -26,6 +26,7 @@ import { OrderFailure, OrderSuccess, OrderTracking } from './pages/OrderStatus';
 import AdminOrders from './pages/AdminOrders';
 import MyReviews from './pages/MyReviews';
 import AdminReviews from './pages/AdminReviews';
+import BuildPlanner from './pages/BuildPlanner';
 
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
@@ -35,7 +36,7 @@ export default function App() {
 
   const { user, isInitialized } = useSelector((state) => state.auth);
   const guestItems = useSelector((state) => state.store.guest);
- 
+
   // Restore authenticated user on app load
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -69,6 +70,7 @@ export default function App() {
       <Route path="/cart" element={<Cart />} />
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/search" element={<SearchResults />} />
+      <Route path="/build-planner" element={<BuildPlanner />} />
 
       <Route element={<ProtectedRoute />}>
         <Route path="/profile" element={<Profile />} />

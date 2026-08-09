@@ -24,6 +24,7 @@ export default function SiteHeader() {
           className={`${mobileOpen ? 'absolute left-0 right-0 top-full flex border-b border-foreground/10 bg-background p-5' : 'hidden'} items-center gap-4 text-sm text-zinc-300 md:flex md:static md:border-0 md:bg-transparent md:p-0`}
         >
           <Link to="/products">Products</Link>
+          <Link to="/build-planner">Build PC</Link>
           <Link to="/categories">Categories</Link>
           <Link to="/brands">Brands</Link>
           {user?.role === 'admin' && (

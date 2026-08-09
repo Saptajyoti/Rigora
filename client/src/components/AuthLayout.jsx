@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function AuthLayout({ title, subtitle, children }) {
   return (
-    <main className="relative grid min-h-screen place-items-center overflow-hidden bg-[#07090f] px-4 py-10 text-zinc-100">
+    <main className="relative grid min-h-screen place-items-center overflow-hidden bg-background px-4 py-10 text-foreground">
       <div className="absolute -left-32 top-8 h-80 w-80 rounded-full bg-violet-600/20 blur-3xl" />
       <div className="absolute -bottom-24 right-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
       <motion.section

@@ -6,7 +6,7 @@ export default function ProtectedRoute() {
   const location = useLocation();
   if (!isInitialized)
     return (
-      <main className="grid min-h-screen place-items-center bg-[#07090f] text-zinc-400">
+      <main className="grid min-h-screen place-items-center bg-background text-zinc-400">
         Loading Rigora…
       </main>
     );

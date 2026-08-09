@@ -30,24 +30,30 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <main className="bg-[#07090f] px-6 py-14 text-zinc-100">
+      <main className="bg-background px-6 py-14 text-foreground">
         <motion.section
-          className="mx-auto max-w-7xl rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 via-white/[.03] to-violet-500/10 px-6 py-20 text-center sm:px-12"
+          className="rigora-grid mx-auto grid max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 via-white/[.03] to-violet-500/10 lg:grid-cols-[1.05fr_.95fr]"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
         >
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
-            Welcome to Rigora
-            <span className="mt-6 block text-base font-normal text-zinc-400">
-              Premium gaming hardware, precisely curated.
-            </span>
-            <span className="mt-8 flex justify-center gap-3">
+          <div className="relative z-10 px-6 py-14 text-center sm:px-12 lg:flex lg:flex-col lg:justify-center lg:text-left">
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-cyan-300">
+              Rigora performance lab
+            </p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">
+              Engineered to perform.
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-7 text-zinc-400 lg:text-lg">
+              Precision-picked PC hardware for the build you have in mind and the
+              performance you expect.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
               <Link
                 className="rounded-xl bg-cyan-300 px-5 py-3 text-sm font-semibold text-zinc-950"
-                to="/login"
+                to="/products"
               >
-                Sign in
+                Explore hardware
               </Link>
               <Link
                 className="rounded-xl border border-white/15 px-5 py-3 text-sm font-semibold"
@@ -55,8 +61,16 @@ export default function Home() {
               >
                 Create account
               </Link>
-            </span>
-          </h1>
+            </div>
+          </div>
+          <div className="relative min-h-80 overflow-hidden lg:min-h-0">
+            <img
+              src="/rigora-hero.png"
+              alt="High-end custom gaming PC with cyan lighting"
+              className="absolute inset-0 h-full w-full object-cover object-right"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent lg:bg-gradient-to-r" />
+          </div>
         </motion.section>
         <div className="mx-auto max-w-7xl">
           <ProductRow title="Featured builds" filter={{ featured: true }} />

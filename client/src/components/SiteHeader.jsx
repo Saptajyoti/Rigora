@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import MiniCart from './MiniCart';
+import ThemeToggle from './ThemeToggle';
 
 export default function SiteHeader() {
   const { user } = useSelector((state) => state.auth);
@@ -14,13 +15,13 @@ export default function SiteHeader() {
     : guest.reduce((sum, item) => sum + item.quantity, 0);
   const wishlistCount = wishlist?.products?.length || 0;
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-[#07090f]/85 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-foreground/10 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <Link to="/" className="font-bold tracking-[.25em] text-cyan-300">
           RIGORA
         </Link>
         <nav
-          className={`${mobileOpen ? 'absolute left-0 right-0 top-full flex border-b border-white/10 bg-[#07090f] p-5' : 'hidden'} items-center gap-4 text-sm text-zinc-300 md:flex md:static md:border-0 md:bg-transparent md:p-0`}
+          className={`${mobileOpen ? 'absolute left-0 right-0 top-full flex border-b border-foreground/10 bg-background p-5' : 'hidden'} items-center gap-4 text-sm text-zinc-300 md:flex md:static md:border-0 md:bg-transparent md:p-0`}
         >
           <Link to="/products">Products</Link>
           <Link to="/categories">Categories</Link>
@@ -37,7 +38,7 @@ export default function SiteHeader() {
           )}
           <Link
             to={user ? '/profile' : '/login'}
-            className="rounded-lg border border-white/15 px-3 py-1.5 text-zinc-100"
+            className="rounded-lg border border-foreground/15 px-3 py-1.5 text-foreground"
           >
             {user ? 'Profile' : 'Sign in'}
           </Link>
@@ -46,6 +47,7 @@ export default function SiteHeader() {
           <Link aria-label="Search" to="/search" className="rounded-lg p-2 text-zinc-300">
             <Search size={18} />
           </Link>
+          <ThemeToggle />
           <Link
             aria-label="Wishlist"
             to="/wishlist"

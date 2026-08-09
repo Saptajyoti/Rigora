@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import { imageUrl, money, useImageFallback } from '../lib/catalog';
 import { addToCart, toggleWishlist } from '../store/storeSlice';
+import ProductBadges from './ProductBadges';
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -55,7 +56,8 @@ export default function ProductCard({ product }) {
       className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] transition hover:border-cyan-300/35"
     >
       <Link to={`/products/${product.slug}`} className="block">
-        <div className="aspect-square bg-gradient-to-br from-zinc-800 to-zinc-950">
+        <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-950">
+          <ProductBadges product={product} />
           {product.images?.[0] ? (
             <img
               src={imageUrl(product.images[0])}

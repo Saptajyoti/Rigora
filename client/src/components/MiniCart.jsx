@@ -14,7 +14,7 @@ export default function MiniCart({ open, onClose }) {
         onClick={onClose}
         className="fixed inset-0 z-30 bg-black/60"
       />
-      <aside className="fixed right-0 top-0 z-40 flex h-full w-full max-w-sm flex-col border-l border-white/10 bg-[#090b12] p-5 shadow-2xl">
+      <aside className="fixed right-0 top-0 z-40 flex h-full w-full max-w-sm flex-col border-l border-white/10 bg-background p-5 shadow-2xl">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 font-semibold">
             <ShoppingBag size={18} /> Cart ({totals.itemCount})

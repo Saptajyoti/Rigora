@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import RigoraLogo from './RigoraLogo';
 
 export default function AuthLayout({ title, subtitle, children }) {
   return (
@@ -9,13 +10,10 @@ export default function AuthLayout({ title, subtitle, children }) {
       <motion.section
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.055] p-7 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-9"
+        className="rigora-glass relative w-full max-w-md rounded-2xl p-7 shadow-2xl shadow-black/30 sm:p-9"
       >
-        <Link
-          className="mb-7 inline-block text-lg font-bold tracking-[0.2em] text-cyan-300"
-          to="/"
-        >
-          RIGORA
+        <Link className="mb-7 inline-block text-cyan-300" to="/" aria-label="Rigora home">
+          <RigoraLogo />
         </Link>
         <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
         {subtitle && <p className="mt-2 text-sm leading-6 text-zinc-400">{subtitle}</p>}

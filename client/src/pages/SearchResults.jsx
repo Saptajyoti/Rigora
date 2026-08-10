@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import ProductGrid from '../components/ProductGrid';
 import SearchBar from '../components/SearchBar';
 import SiteHeader from '../components/SiteHeader';
+import PageIntro from '../components/PageIntro';
 import { useProducts } from '../hooks/useCatalog';
 
 export default function SearchResults() {
@@ -19,7 +20,11 @@ export default function SearchResults() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-5 py-10">
-        <h1 className="text-3xl font-semibold">Search Rigora</h1>
+        <PageIntro
+          eyebrow="Catalog search"
+          title="Search Rigora"
+          description="Find components by model, brand, or category."
+        />
         <div className="mt-6 max-w-xl">
           <SearchBar
             value={term}

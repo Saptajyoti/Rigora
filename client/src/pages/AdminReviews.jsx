@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SiteHeader from '../components/SiteHeader';
 import { fetchAdminReviews, moderateReview } from '../store/reviewSlice';
+import PageIntro from '../components/PageIntro';
 export default function AdminReviews() {
   const dispatch = useDispatch();
   const { admin, loading } = useSelector((s) => s.reviews);
@@ -12,11 +13,15 @@ export default function AdminReviews() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-5 py-10">
-        <h1 className="text-3xl font-semibold">Review moderation</h1>
+        <PageIntro
+          eyebrow="Admin workspace"
+          title="Review moderation"
+          description="Moderate customer feedback before it appears in the catalog."
+        />
         {loading ? (
           <p className="mt-6 text-zinc-400">Loading reviews…</p>
         ) : (
-          <div className="mt-6 overflow-auto">
+          <div className="rigora-panel mt-6 overflow-auto">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="text-zinc-500">

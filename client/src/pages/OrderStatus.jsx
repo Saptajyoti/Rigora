@@ -10,7 +10,7 @@ export function OrderSuccess() {
         <p className="mt-4 text-zinc-400">Your build is officially in motion.</p>
         <Link
           to={`/orders/${id}`}
-          className="mt-8 inline-block rounded-xl bg-cyan-300 px-5 py-3 font-semibold text-zinc-950"
+          className="rigora-primary-action mt-8 inline-block px-5 py-3"
         >
           View order
         </Link>
@@ -29,7 +29,7 @@ export function OrderFailure() {
         </p>
         <Link
           to="/checkout"
-          className="mt-8 inline-block rounded-xl border border-white/15 px-5 py-3"
+          className="rigora-control mt-8 inline-block border border-white/15 px-5 py-3"
         >
           Return to checkout
         </Link>

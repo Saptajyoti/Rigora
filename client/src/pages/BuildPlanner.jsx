@@ -50,7 +50,7 @@ export default function BuildPlanner() {
     <>
       <SiteHeader />
       <main className="bg-background px-5 py-10 text-foreground sm:py-14">
-        <section className="rigora-grid mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 via-white/[.03] to-violet-500/10 p-6 sm:p-10">
+        <section className="rigora-grid rigora-panel rigora-panel-raised mx-auto max-w-7xl overflow-hidden p-6 sm:p-10">
           <div className="relative z-10 max-w-3xl">
             <p className="text-xs font-medium uppercase tracking-[0.25em] text-cyan-300">
               Rigora build planner
@@ -66,10 +66,7 @@ export default function BuildPlanner() {
         </section>
 
         <div className="mx-auto mt-8 grid max-w-7xl gap-8 lg:grid-cols-[320px_1fr]">
-          <form
-            onSubmit={createBuild}
-            className="h-fit rounded-2xl border border-white/10 bg-white/[0.045] p-6"
-          >
+          <form onSubmit={createBuild} className="rigora-panel h-fit p-6">
             <label className="block text-sm font-semibold" htmlFor="build-budget">
               Budget in INR
             </label>
@@ -100,7 +97,7 @@ export default function BuildPlanner() {
                 {purposes.map((option) => (
                   <label
                     key={option.value}
-                    className={`block cursor-pointer rounded-xl border p-3 transition ${
+                    className={`rigora-control block cursor-pointer border p-3 transition ${
                       purpose === option.value
                         ? 'border-cyan-300 bg-cyan-300/10'
                         : 'border-white/10 hover:border-cyan-300/40'
@@ -125,7 +122,7 @@ export default function BuildPlanner() {
             <button
               type="submit"
               disabled={loading}
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-4 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400 disabled:opacity-60"
+              className="rigora-primary-action mt-6 flex w-full items-center justify-center gap-2 px-4 py-3 text-sm disabled:opacity-60"
             >
               {loading ? (
                 <LoaderCircle className="animate-spin" size={18} />
@@ -143,7 +140,7 @@ export default function BuildPlanner() {
               </div>
             )}
             {!build && !loading && !error && (
-              <div className="rigora-grid rounded-2xl border border-dashed border-white/15 p-10 text-center">
+              <div className="rigora-grid rigora-panel border-dashed p-10 text-center">
                 <Cpu className="relative z-10 mx-auto text-cyan-300" size={40} />
                 <h2 className="relative z-10 mt-4 text-xl font-semibold">
                   Your build will appear here
@@ -165,7 +162,7 @@ export default function BuildPlanner() {
             )}
             {build && (
               <div className="space-y-5">
-                <div className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.045] p-5 sm:grid-cols-3">
+                <div className="rigora-panel rigora-panel-raised grid gap-4 p-5 sm:grid-cols-3">
                   <div>
                     <p className="text-xs uppercase tracking-widest text-zinc-400">
                       Build total
@@ -209,7 +206,7 @@ export default function BuildPlanner() {
                     <Link
                       key={product._id}
                       to={`/products/${product.slug}`}
-                      className="group flex gap-4 rounded-2xl border border-white/10 bg-white/[0.045] p-4 transition hover:border-cyan-300/40"
+                      className="rigora-panel rigora-panel-interactive group flex gap-4 p-4"
                     >
                       <img
                         src={imageUrl(product.images?.[0])}

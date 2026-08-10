@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SiteHeader from '../components/SiteHeader';
 import { cancelOrder, fetchOrder } from '../store/orderSlice';
 import { money } from '../lib/catalog';
+import PageIntro from '../components/PageIntro';
 export default function OrderDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -32,25 +33,24 @@ export default function OrderDetails() {
         <Link to="/orders" className="text-cyan-300">
           ← Orders
         </Link>
-        <div className="mt-5 flex justify-between">
-          <div>
-            <h1 className="text-3xl font-semibold">
-              Order #{order._id.slice(-8).toUpperCase()}
-            </h1>
-            <p className="mt-2 text-zinc-400">
-              {order.orderStatus} · Payment {order.paymentStatus}
-            </p>
-          </div>
-          {['pending', 'confirmed', 'processing'].includes(order.orderStatus) && (
-            <button
-              onClick={() => dispatch(cancelOrder(order._id))}
-              className="text-rose-300"
-            >
-              Cancel order
-            </button>
-          )}
+        <div className="mt-5">
+          <PageIntro
+            eyebrow="Order details"
+            title={`Order #${order._id.slice(-8).toUpperCase()}`}
+            description={`${order.orderStatus} · Payment ${order.paymentStatus}`}
+            action={
+              ['pending', 'confirmed', 'processing'].includes(order.orderStatus) && (
+                <button
+                  onClick={() => dispatch(cancelOrder(order._id))}
+                  className="text-sm text-rose-300"
+                >
+                  Cancel order
+                </button>
+              )
+            }
+          />
         </div>
-        <div className="mt-8 space-y-3 rounded-2xl border border-white/10 p-5">
+        <div className="rigora-panel mt-8 space-y-3 p-5">
           {order.items.map((item) => (
             <div key={item._id} className="flex justify-between">
               <span>

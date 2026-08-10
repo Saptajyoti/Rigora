@@ -1,6 +1,6 @@
 export default function QuantitySelector({ value, onChange, max = 99 }) {
   return (
-    <div className="inline-flex items-center rounded-lg border border-white/10">
+    <div className="rigora-control inline-flex items-center border border-white/10">
       <button
         aria-label="Decrease quantity"
         onClick={() => onChange(Math.max(1, value - 1))}

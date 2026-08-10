@@ -2,14 +2,14 @@ export default function FilterSidebar({ categories, brands, filters, onChange })
   const select = (event) =>
     onChange({ ...filters, [event.target.name]: event.target.value, page: 1 });
   return (
-    <aside className="space-y-5 rounded-2xl border border-white/10 bg-white/[0.035] p-5">
+    <aside className="rigora-glass space-y-5 rounded-xl p-5">
       <div>
         <label className="mb-2 block text-sm font-medium">Category</label>
         <select
           name="category"
           value={filters.category}
           onChange={select}
-          className="w-full rounded-lg border border-white/10 bg-zinc-900 p-2.5 text-sm"
+          className="rigora-control w-full border border-white/10 bg-zinc-900 p-2.5 text-sm"
         >
           <option value="">All categories</option>
           {categories.map((item) => (
@@ -25,7 +25,7 @@ export default function FilterSidebar({ categories, brands, filters, onChange })
           name="brand"
           value={filters.brand}
           onChange={select}
-          className="w-full rounded-lg border border-white/10 bg-zinc-900 p-2.5 text-sm"
+          className="rigora-control w-full border border-white/10 bg-zinc-900 p-2.5 text-sm"
         >
           <option value="">All brands</option>
           {brands.map((item) => (
@@ -41,7 +41,7 @@ export default function FilterSidebar({ categories, brands, filters, onChange })
           name="sort"
           value={filters.sort}
           onChange={select}
-          className="w-full rounded-lg border border-white/10 bg-zinc-900 p-2.5 text-sm"
+          className="rigora-control w-full border border-white/10 bg-zinc-900 p-2.5 text-sm"
         >
           <option value="newest">Newest</option>
           <option value="price-asc">Price: low to high</option>

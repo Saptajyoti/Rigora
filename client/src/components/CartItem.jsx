@@ -5,7 +5,7 @@ export default function CartItem({ item, onUpdate, onRemove }) {
   const product = item.product;
   return (
     <article className="flex gap-4 border-b border-white/10 py-5">
-      <div className="h-20 w-20 overflow-hidden rounded-lg bg-zinc-900">
+      <div className="rigora-control h-20 w-20 overflow-hidden bg-zinc-900">
         {product.images?.[0] && (
           <img
             src={imageUrl(product.images[0])}

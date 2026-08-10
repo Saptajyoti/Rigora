@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 import { imageUrl, useImageFallback } from '../lib/catalog';
 import { useCatalogResources } from '../hooks/useCatalog';
+import PageIntro from '../components/PageIntro';
 
 export default function Brands() {
   const { brands, loading } = useCatalogResources();
@@ -9,8 +10,11 @@ export default function Brands() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-5 py-10">
-        <p className="text-xs uppercase tracking-[.25em] text-cyan-300">Partners</p>
-        <h1 className="mt-2 text-3xl font-semibold">Trusted brands</h1>
+        <PageIntro
+          eyebrow="Partners"
+          title="Trusted brands"
+          description="Browse the hardware makers behind dependable performance."
+        />
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {loading ? (
             <p className="text-zinc-500">Loading brands…</p>
@@ -19,7 +23,7 @@ export default function Brands() {
               <Link
                 key={brand._id}
                 to={`/products?brand=${brand._id}`}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-cyan-300/40"
+                className="rigora-panel rigora-panel-interactive p-6"
               >
                 {brand.logo && (
                   <img

@@ -4,6 +4,7 @@ import SiteHeader from '../components/SiteHeader';
 import WishlistCard from '../components/WishlistCard';
 import { loadStore } from '../store/storeSlice';
 import { useDispatch } from 'react-redux';
+import PageIntro from '../components/PageIntro';
 
 export default function Wishlist() {
   const { wishlist, loading, error } = useSelector((state) => state.store);
@@ -13,7 +14,11 @@ export default function Wishlist() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-5 py-10">
-        <h1 className="text-3xl font-semibold">Wishlist</h1>
+        <PageIntro
+          eyebrow="Saved hardware"
+          title="Wishlist"
+          description="Keep the components worth revisiting in one place."
+        />
         {loading && !wishlist ? (
           <p className="mt-8 text-zinc-400">Loading your wishlist…</p>
         ) : error ? (

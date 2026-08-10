@@ -7,6 +7,7 @@ import { loadRazorpay } from '../lib/razorpay';
 import { api } from '../lib/api';
 import { checkout, verifyRazorpayPayment } from '../store/orderSlice';
 import { loadStore } from '../store/storeSlice';
+import PageIntro from '../components/PageIntro';
 const blank = {
   fullName: '',
   phone: '',
@@ -98,7 +99,7 @@ export default function Checkout() {
       </>
     );
   const AddressFields = ({ title, value, setter }) => (
-    <section className="rounded-2xl border border-white/10 bg-white/[.04] p-5">
+    <section className="rigora-panel p-5">
       <h2 className="font-semibold">{title}</h2>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {Object.entries(value).map(([name, field]) => (
@@ -119,7 +120,11 @@ export default function Checkout() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 py-10">
-        <h1 className="text-3xl font-semibold">Secure checkout</h1>
+        <PageIntro
+          eyebrow="Secure checkout"
+          title="Complete your order"
+          description="Your address and payment details are handled securely."
+        />
         <form onSubmit={submit} className="mt-8 grid gap-8 lg:grid-cols-[1fr_340px]">
           <div className="space-y-6">
             <AddressFields
@@ -127,7 +132,7 @@ export default function Checkout() {
               value={shipping}
               setter={setShipping}
             />{' '}
-            <section className="rounded-2xl border border-white/10 bg-white/[.04] p-5">
+            <section className="rigora-panel p-5">
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -146,7 +151,7 @@ export default function Checkout() {
                 </div>
               )}
             </section>
-            <section className="rounded-2xl border border-white/10 bg-white/[.04] p-5">
+            <section className="rigora-panel p-5">
               <h2 className="font-semibold">Payment method</h2>
               <label className="mt-4 flex gap-3">
                 <input
@@ -168,7 +173,7 @@ export default function Checkout() {
             {error && <p className="text-rose-300">{error}</p>}
             <button
               disabled={loading}
-              className="w-full rounded-xl bg-cyan-300 py-3 font-semibold text-zinc-950 disabled:opacity-50"
+              className="rigora-primary-action w-full py-3 disabled:opacity-50"
             >
               {loading
                 ? 'Processing…'

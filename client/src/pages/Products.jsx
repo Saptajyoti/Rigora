@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import FilterSidebar from '../components/FilterSidebar';
 import Pagination from '../components/Pagination';
+import PageIntro from '../components/PageIntro';
 import ProductGrid from '../components/ProductGrid';
 import SearchBar from '../components/SearchBar';
 import SiteHeader from '../components/SiteHeader';
@@ -24,20 +25,21 @@ export default function Products() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-5 py-10">
-        <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <div>
-            <p className="text-xs uppercase tracking-[.25em] text-cyan-300">Catalog</p>
-            <h1 className="mt-2 text-3xl font-semibold">Engineered to perform.</h1>
-          </div>
-          <SearchBar
-            value={term}
-            onChange={setTerm}
-            onSubmit={(event) => {
-              event.preventDefault();
-              setFilters({ ...filters, search: term, page: 1 });
-            }}
-          />
-        </div>
+        <PageIntro
+          eyebrow="Catalog"
+          title="Engineered to perform."
+          description="Search and compare carefully selected components for your next build."
+          action={
+            <SearchBar
+              value={term}
+              onChange={setTerm}
+              onSubmit={(event) => {
+                event.preventDefault();
+                setFilters({ ...filters, search: term, page: 1 });
+              }}
+            />
+          }
+        />
         <div className="grid gap-7 lg:grid-cols-[260px_1fr]">
           <FilterSidebar
             categories={categories}

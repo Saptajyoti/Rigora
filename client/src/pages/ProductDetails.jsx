@@ -10,6 +10,16 @@ import { api } from '../lib/api';
 import { addToCart, toggleWishlist } from '../store/storeSlice';
 import { fetchProductReviews } from '../store/reviewSlice';
 import { RatingSummary, ReviewForm, ReviewList } from '../components/Reviews';
+import AnimatedAddToCartButton from '../components/AnimatedAddToCartButton';
+
+function DetailSectionHeading({ eyebrow, title }) {
+  return (
+    <div className="border-b border-white/10 pb-4">
+      <p className="rigora-kicker">{eyebrow}</p>
+      <h2 className="mt-2 text-2xl font-semibold">{title}</h2>
+    </div>
+  );
+}
 
 export default function ProductDetails() {
   const { slug } = useParams();
@@ -96,6 +106,7 @@ export default function ProductDetails() {
   const isWishlisted = wishlist.some(
     (item) => item._id === product._id || item.product === product._id,
   );
+  const handleAddToCart = () => dispatch(addToCart({ product })).unwrap();
   let recentlyViewed = [];
   try {
     recentlyViewed = JSON.parse(localStorage.getItem('rigora_recently_viewed') || '[]')
@@ -113,7 +124,7 @@ export default function ProductDetails() {
         </Link>
         <div className="mt-6 grid gap-10 lg:grid-cols-2">
           <div>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+            <div className="rigora-panel relative overflow-hidden bg-zinc-950">
               {images[selectedImage] ? (
                 <img
                   onClick={() => setZoomed(!zoomed)}
@@ -130,7 +141,7 @@ export default function ProductDetails() {
               <button
                 onClick={() => setZoomed(!zoomed)}
                 aria-label="Toggle image zoom"
-                className="absolute bottom-4 right-4 rounded-full bg-black/60 p-3"
+                className="rigora-control absolute bottom-4 right-4 border border-white/15 bg-zinc-950/95 p-3"
               >
                 <ZoomIn size={18} />
               </button>
@@ -144,7 +155,7 @@ export default function ProductDetails() {
                       setSelectedImage(index);
                       setZoomed(false);
                     }}
-                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-lg border ${selectedImage === index ? 'border-cyan-300' : 'border-white/10'}`}
+                    className={`rigora-control h-20 w-20 shrink-0 overflow-hidden border ${selectedImage === index ? 'border-cyan-300' : 'border-white/10'}`}
                   >
                     <img
                       src={imageUrl(image)}
@@ -158,8 +169,9 @@ export default function ProductDetails() {
             )}
           </div>
           <section>
-            <p className="text-xs uppercase tracking-[.25em] text-cyan-300">
-              {product.brand?.name}
+            <p className="rigora-kicker">
+              {product.brand?.name || 'Rigora'}
+              {product.category?.name ? ` / ${product.category.name}` : ''}
             </p>
             <h1 className="mt-3 text-4xl font-semibold tracking-tight">{product.name}</h1>
             <p className="mt-5 text-3xl font-semibold">{money(product.price)}</p>
@@ -173,33 +185,47 @@ export default function ProductDetails() {
               </p>
             )}
             <p className="mt-7 leading-7 text-zinc-300">{product.description}</p>
-            <p className="mt-5 text-sm text-zinc-400">
-              {product.stock > 0 ? `${product.stock} available` : 'Out of stock'}
-            </p>
+            <div className="rigora-panel mt-6 grid grid-cols-2 divide-x divide-white/10 overflow-hidden text-sm">
+              <div className="p-4">
+                <p className="rigora-kicker">Availability</p>
+                <p
+                  className={`mt-2 font-semibold ${product.stock > 0 ? 'text-emerald-300' : 'text-rose-300'}`}
+                >
+                  {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                </p>
+              </div>
+              <div className="p-4">
+                <p className="rigora-kicker">Catalog code</p>
+                <p className="mt-2 truncate font-mono text-xs text-zinc-300">
+                  {product.sku || 'Not assigned'}
+                </p>
+              </div>
+            </div>
             <div className="mt-6 flex gap-3">
-              <button
+              <AnimatedAddToCartButton
                 disabled={product.stock < 1}
-                onClick={() => dispatch(addToCart({ product }))}
-                className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-cyan-300 py-3 font-semibold text-zinc-950 disabled:opacity-50"
-              >
-                <ShoppingCart size={18} />{' '}
-                {product.stock > 0 ? 'Add to cart' : 'Out of stock'}
-              </button>
+                onAdd={handleAddToCart}
+                icon={<ShoppingCart size={18} aria-hidden="true" />}
+                className="rigora-primary-action flex flex-1 items-center justify-center gap-2 py-3 disabled:opacity-50"
+              />
               <button
                 onClick={() => dispatch(toggleWishlist(product._id))}
                 aria-label="Toggle wishlist"
-                className={`rounded-xl border px-4 ${isWishlisted ? 'border-rose-400 text-rose-300' : 'border-white/15'}`}
+                className={`rigora-control border px-4 ${isWishlisted ? 'border-rose-400 text-rose-300' : 'border-white/15'}`}
               >
                 <Heart fill={isWishlisted ? 'currentColor' : 'none'} />
               </button>
             </div>
-            <div className="mt-8 border-t border-white/10 pt-6">
-              <h2 className="font-semibold">Specifications</h2>
-              <dl className="mt-4 space-y-3">
+            <div className="rigora-panel mt-8 overflow-hidden">
+              <div className="border-b border-white/10 px-5 py-4">
+                <p className="rigora-kicker">Technical reference</p>
+                <h2 className="mt-1 font-semibold">Specifications</h2>
+              </div>
+              <dl className="divide-y divide-white/10">
                 {Object.entries(product.specifications || {}).map(([key, value]) => (
-                  <div key={key} className="flex justify-between gap-5 text-sm">
+                  <div key={key} className="flex justify-between gap-5 px-5 py-3 text-sm">
                     <dt className="text-zinc-500">{key}</dt>
-                    <dd>{value}</dd>
+                    <dd className="text-right">{value}</dd>
                   </div>
                 ))}
               </dl>
@@ -207,7 +233,10 @@ export default function ProductDetails() {
           </section>
         </div>
         <section className="mt-16">
-          <h2 className="text-2xl font-semibold">Related products</h2>
+          <DetailSectionHeading
+            eyebrow="Recommended for this build"
+            title="Related products"
+          />
           <div className="mt-6">
             <ProductGrid
               products={related.products
@@ -219,7 +248,7 @@ export default function ProductDetails() {
         </section>
         {recentlyViewed.length > 0 && (
           <section className="mt-16">
-            <h2 className="text-2xl font-semibold">Recently viewed</h2>
+            <DetailSectionHeading eyebrow="Browsing history" title="Recently viewed" />
             <div className="mt-6">
               <ProductGrid products={recentlyViewed} loading={false} />
             </div>
@@ -228,7 +257,10 @@ export default function ProductDetails() {
         {(recommendations.alsoBought.length > 0 ||
           recommendations.alsoViewed.length > 0) && (
           <section className="mt-16">
-            <h2 className="text-2xl font-semibold">Customers also explored</h2>
+            <DetailSectionHeading
+              eyebrow="Catalog patterns"
+              title="Customers also explored"
+            />
             <div className="mt-6">
               <ProductGrid
                 products={(recommendations.alsoBought.length
@@ -243,7 +275,7 @@ export default function ProductDetails() {
         <section className="mt-16 grid gap-8 lg:grid-cols-[320px_1fr]">
           <RatingSummary product={product} />
           <div>
-            <h2 className="text-2xl font-semibold">Reviews</h2>
+            <DetailSectionHeading eyebrow="Verified feedback" title="Reviews" />
             <ReviewList />
             <ReviewForm productId={product._id} />
           </div>

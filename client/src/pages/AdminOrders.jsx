@@ -4,6 +4,7 @@ import SiteHeader from '../components/SiteHeader';
 import { api } from '../lib/api';
 import { money } from '../lib/catalog';
 import { updateOrderStatus } from '../store/orderSlice';
+import PageIntro from '../components/PageIntro';
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [status, setStatus] = useState('');
@@ -24,7 +25,11 @@ export default function AdminOrders() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-5 py-10">
-        <h1 className="text-3xl font-semibold">Order management</h1>
+        <PageIntro
+          eyebrow="Admin workspace"
+          title="Order management"
+          description="Review customer orders and keep fulfillment records current."
+        />
         <div className="mt-6 flex flex-wrap gap-3">
           <input
             value={search}
@@ -49,14 +54,11 @@ export default function AdminOrders() {
               <option key={value}>{value}</option>
             ))}
           </select>
-          <button
-            onClick={refresh}
-            className="rounded-lg bg-cyan-300 px-4 text-sm font-semibold text-zinc-950"
-          >
+          <button onClick={refresh} className="rigora-primary-action px-4 text-sm">
             Search
           </button>
         </div>
-        <div className="mt-6 overflow-auto rounded-2xl border border-white/10">
+        <div className="rigora-panel mt-6 overflow-auto">
           <table className="w-full text-left text-sm">
             <thead className="text-zinc-400">
               <tr>

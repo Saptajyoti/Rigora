@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -6,13 +5,13 @@ import { useState } from 'react';
 import { imageUrl, money, useImageFallback } from '../lib/catalog';
 import { addToCart, toggleWishlist } from '../store/storeSlice';
 import ProductBadges from './ProductBadges';
+import AnimatedAddToCartButton from './AnimatedAddToCartButton';
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
 
   const wishlist = useSelector((state) => state.store.wishlist?.products || []);
 
-  const [loadingCart, setLoadingCart] = useState(false);
   const [loadingWish, setLoadingWish] = useState(false);
 
   const isWishlisted = wishlist.some((item) => {
@@ -20,18 +19,10 @@ export default function ProductCard({ product }) {
     return id === product._id;
   });
 
-  const handleAddToCart = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (loadingCart) return;
-
-    try {
-      setLoadingCart(true);
-      await dispatch(addToCart({ product, quantity: 1 })).unwrap();
-    } finally {
-      setLoadingCart(false);
-    }
+  const handleAddToCart = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    await dispatch(addToCart({ product, quantity: 1 })).unwrap();
   };
 
   const handleWishlist = async (e) => {
@@ -51,12 +42,9 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <motion.article
-      whileHover={{ y: -5 }}
-      className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] transition hover:border-cyan-300/35"
-    >
+    <article className="rigora-panel rigora-panel-interactive group overflow-hidden">
       <Link to={`/products/${product.slug}`} className="block">
-        <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-950">
+        <div className="relative aspect-square overflow-hidden bg-zinc-950">
           <ProductBadges product={product} />
           {product.images?.[0] ? (
             <img
@@ -73,9 +61,7 @@ export default function ProductCard({ product }) {
         </div>
 
         <div className="p-4">
-          <p className="text-xs font-medium uppercase tracking-widest text-cyan-300">
-            {product.brand?.name || 'Rigora'}
-          </p>
+          <p className="rigora-kicker">{product.brand?.name || 'Rigora'}</p>
 
           <h3 className="mt-2 line-clamp-2 min-h-11 font-semibold text-zinc-100">
             {product.name}
@@ -92,24 +78,19 @@ export default function ProductCard({ product }) {
           </div>
 
           <div className="mt-5 flex gap-3">
-            <button
-              type="button"
-              onClick={handleAddToCart}
-              disabled={loadingCart || product.stock <= 0}
-              className="flex-1 rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {loadingCart
-                ? 'Adding...'
-                : product.stock > 0
-                  ? 'Add to Cart'
-                  : 'Out of Stock'}
-            </button>
+            <AnimatedAddToCartButton
+              onAdd={handleAddToCart}
+              disabled={product.stock <= 0}
+              className="rigora-primary-action flex-1 px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+              idleLabel="Add to Cart"
+              outOfStockLabel="Out of Stock"
+            />
 
             <button
               type="button"
               onClick={handleWishlist}
               disabled={loadingWish}
-              className={`rounded-xl border px-4 py-2 text-lg transition ${
+              className={`rigora-control border px-4 py-2 text-lg transition ${
                 isWishlisted
                   ? 'border-red-500 bg-red-500/20 text-red-400'
                   : 'border-white/10 hover:border-red-400 hover:text-red-400'
@@ -120,6 +101,6 @@ export default function ProductCard({ product }) {
           </div>
         </div>
       </Link>
-    </motion.article>
+    </article>
   );
 }

@@ -8,7 +8,7 @@ export default function Pagination({ pagination, onChange }) {
       <button
         disabled={pagination.page === 1}
         onClick={() => onChange(pagination.page - 1)}
-        className="rounded-lg border border-white/10 px-3 py-2 text-sm disabled:opacity-40"
+        className="rigora-control border border-white/10 px-3 py-2 text-sm disabled:opacity-40"
       >
         Previous
       </button>
@@ -18,7 +18,7 @@ export default function Pagination({ pagination, onChange }) {
       <button
         disabled={pagination.page === pagination.pages}
         onClick={() => onChange(pagination.page + 1)}
-        className="rounded-lg border border-white/10 px-3 py-2 text-sm disabled:opacity-40"
+        className="rigora-control border border-white/10 px-3 py-2 text-sm disabled:opacity-40"
       >
         Next
       </button>

@@ -182,6 +182,7 @@ const slice = createSlice({
     totals: guestTotals(initialGuest),
     wishlist: null,
     guest: initialGuest,
+    cartAddSequence: 0,
     loading: false,
     error: null,
   },
@@ -238,6 +239,7 @@ const slice = createSlice({
 
       .addCase(addToCart.fulfilled, (state, action) => {
         state.loading = false;
+        state.cartAddSequence += 1;
 
         if (action.payload.guest) {
           state.guest = action.payload.guest;

@@ -26,7 +26,7 @@ export function StarRating({ value, onChange, label = 'Rating' }) {
 export function RatingSummary({ product }) {
   const d = product.ratingDistribution || {};
   return (
-    <section className="rounded-2xl border border-white/10 bg-white/[.04] p-5">
+    <section className="rigora-panel p-5">
       <div className="flex items-center gap-4">
         <span className="text-4xl font-semibold">
           {Number(product.averageRating || 0).toFixed(1)}
@@ -73,7 +73,7 @@ export function ReviewForm({ productId }) {
     setComment('');
   };
   return (
-    <form onSubmit={submit} className="mt-6 rounded-2xl border border-white/10 p-5">
+    <form onSubmit={submit} className="rigora-panel mt-6 p-5">
       <h3 className="font-semibold">Write a review</h3>
       <div className="mt-3">
         <StarRating value={rating} onChange={setRating} />
@@ -96,7 +96,7 @@ export function ReviewForm({ productId }) {
       />
       <button
         disabled={mutationLoading}
-        className="mt-3 rounded-lg bg-cyan-300 px-4 py-2 text-sm font-semibold text-zinc-950"
+        className="rigora-primary-action mt-3 px-4 py-2 text-sm"
       >
         Submit review
       </button>
@@ -107,14 +107,14 @@ export function ReviewList() {
   const dispatch = useDispatch();
   const { reviews, loading, error } = useSelector((s) => s.reviews);
   const user = useSelector((s) => s.auth.user);
-  if (loading) return <div className="mt-6 animate-pulse rounded-2xl bg-white/5 p-12" />;
+  if (loading) return <div className="rigora-panel mt-6 animate-pulse p-12" />;
   if (error) return <p className="mt-6 text-rose-300">{error}</p>;
   if (!reviews.length)
     return <p className="mt-6 text-zinc-400">No approved reviews yet.</p>;
   return (
     <div className="mt-6 space-y-4">
       {reviews.map((review) => (
-        <article key={review._id} className="rounded-2xl border border-white/10 p-5">
+        <article key={review._id} className="rigora-panel p-5">
           <div className="flex justify-between gap-4">
             <div>
               <p className="font-semibold">{review.title}</p>

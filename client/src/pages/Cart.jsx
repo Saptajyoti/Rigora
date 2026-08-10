@@ -3,6 +3,7 @@ import SiteHeader from '../components/SiteHeader';
 import CartItem from '../components/CartItem';
 import CartSummary from '../components/CartSummary';
 import EmptyState from '../components/EmptyState';
+import PageIntro from '../components/PageIntro';
 import { clearGuestCart, loadStore, removeCart, updateCart } from '../store/storeSlice';
 import { Link } from 'react-router-dom';
 export default function Cart() {
@@ -22,17 +23,22 @@ export default function Cart() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 py-10">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-semibold">Your cart</h1>
-          {!cart && guest.length > 0 && (
-            <button
-              onClick={() => dispatch(clearGuestCart())}
-              className="text-sm text-rose-300"
-            >
-              Clear guest cart
-            </button>
-          )}
-        </div>
+        <PageIntro
+          eyebrow="Order workspace"
+          title="Your cart"
+          description="Review selected components before moving to secure checkout."
+          action={
+            !cart &&
+            guest.length > 0 && (
+              <button
+                onClick={() => dispatch(clearGuestCart())}
+                className="text-sm text-rose-300"
+              >
+                Clear guest cart
+              </button>
+            )
+          }
+        />
         {error && (
           <div className="mt-5 rounded-xl border border-rose-400/30 bg-rose-400/10 p-4 text-sm text-rose-200">
             {error}{' '}
@@ -62,13 +68,15 @@ export default function Cart() {
                 />
               ))}
             </section>
-            <CartSummary totals={cart ? totals : guestTotals} />
-            <Link
-              to="/checkout"
-              className="rounded-xl bg-cyan-300 px-4 py-3 text-center font-semibold text-zinc-950"
-            >
-              Checkout
-            </Link>
+            <aside className="space-y-4">
+              <CartSummary totals={cart ? totals : guestTotals} />
+              <Link
+                to="/checkout"
+                className="rigora-primary-action block px-4 py-3 text-center"
+              >
+                Checkout
+              </Link>
+            </aside>
           </div>
         )}
       </main>

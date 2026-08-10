@@ -1,23 +1,48 @@
 import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
 
-export function useCatalogResources() {
-  const [resources, setResources] = useState({
-    categories: [],
-    brands: [],
-    loading: true,
-  });
-  useEffect(() => {
-    Promise.all([api.get('/categories'), api.get('/brands')])
-      .then(([categories, brands]) =>
-        setResources({
+let resourceCache = null;
+let resourceRequest = null;
+
+const fetchCatalogResources = () => {
+  if (resourceCache) return Promise.resolve(resourceCache);
+
+  if (!resourceRequest) {
+    resourceRequest = Promise.all([api.get('/categories'), api.get('/brands')])
+      .then(([categories, brands]) => {
+        resourceCache = {
           categories: categories.data.items,
           brands: brands.data.items,
           loading: false,
-        }),
-      )
-      .catch(() => setResources((value) => ({ ...value, loading: false })));
+        };
+        return resourceCache;
+      })
+      .catch(() => ({ categories: [], brands: [], loading: false }))
+      .finally(() => {
+        resourceRequest = null;
+      });
+  }
+
+  return resourceRequest;
+};
+
+export function useCatalogResources() {
+  const [resources, setResources] = useState(
+    resourceCache || { categories: [], brands: [], loading: true },
+  );
+
+  useEffect(() => {
+    let active = true;
+
+    fetchCatalogResources().then((value) => {
+      if (active) setResources(value);
+    });
+
+    return () => {
+      active = false;
+    };
   }, []);
+
   return resources;
 }
 

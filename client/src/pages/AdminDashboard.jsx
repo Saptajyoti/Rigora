@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import SiteHeader from '../components/SiteHeader';
 import { api } from '../lib/api';
 import { money } from '../lib/catalog';
+import PageIntro from '../components/PageIntro';
 
 function ResourcePanel({ title, endpoint, resources, refresh, fields }) {
   const { register, handleSubmit, reset } = useForm();
@@ -26,7 +27,7 @@ function ResourcePanel({ title, endpoint, resources, refresh, fields }) {
     }
   };
   return (
-    <section className="rounded-2xl border border-white/10 bg-white/[.035] p-5">
+    <section className="rigora-panel p-5">
       <h2 className="text-lg font-semibold">{title}</h2>
       <form onSubmit={handleSubmit(submit)} className="mt-4 flex flex-wrap gap-3">
         {fields.map((field) => (
@@ -35,12 +36,10 @@ function ResourcePanel({ title, endpoint, resources, refresh, fields }) {
             {...register(field.name, { required: field.required })}
             placeholder={field.label}
             type={field.type || 'text'}
-            className="min-w-32 flex-1 rounded-lg border border-white/10 bg-zinc-950 px-3 py-2 text-sm"
+            className="rigora-control min-w-32 flex-1 border border-white/10 bg-zinc-950 px-3 py-2 text-sm"
           />
         ))}
-        <button className="rounded-lg bg-cyan-300 px-4 py-2 text-sm font-semibold text-zinc-950">
-          Add
-        </button>
+        <button className="rigora-primary-action px-4 py-2 text-sm">Add</button>
       </form>
       {error && <p className="mt-3 text-sm text-rose-300">{error}</p>}
       <ul className="mt-5 divide-y divide-white/10">
@@ -113,9 +112,12 @@ export default function AdminDashboard() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-5 py-10">
-        <p className="text-xs uppercase tracking-[.25em] text-cyan-300">Admin</p>
-        <h1 className="mt-2 text-3xl font-semibold">Catalog management</h1>
-        <section className="mt-8 rounded-2xl border border-white/10 bg-white/[.035] p-5">
+        <PageIntro
+          eyebrow="Admin workspace"
+          title="Catalog management"
+          description="Maintain the hardware catalog, categories, and manufacturer records."
+        />
+        <section className="rigora-panel mt-8 p-5">
           <h2 className="text-lg font-semibold">Add product</h2>
           <form
             className="mt-5 grid gap-3 md:grid-cols-2"
@@ -186,7 +188,7 @@ export default function AdminDashboard() {
             <label className="flex items-center gap-2 text-sm">
               <input type="checkbox" {...product.register('bestSeller')} /> Best seller
             </label>
-            <button className="rounded-lg bg-cyan-300 px-4 py-2 text-sm font-semibold text-zinc-950">
+            <button className="rigora-primary-action px-4 py-2 text-sm">
               Create product
             </button>
           </form>
@@ -214,7 +216,7 @@ export default function AdminDashboard() {
             ]}
           />
         </div>
-        <section className="mt-7 rounded-2xl border border-white/10 bg-white/[.035] p-5">
+        <section className="rigora-panel mt-7 p-5">
           <h2 className="text-lg font-semibold">Products</h2>
           <div className="mt-4 overflow-x-auto">
             <table className="w-full text-left text-sm">

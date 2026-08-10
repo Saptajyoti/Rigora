@@ -107,7 +107,7 @@ export default function Profile() {
           {error && <p className="sm:col-span-2 text-sm text-rose-300">{error}</p>}
           <button
             disabled={isLoading}
-            className="sm:col-span-2 rounded-xl bg-cyan-300 py-3 font-semibold text-zinc-950 disabled:opacity-60"
+            className="rigora-primary-action sm:col-span-2 py-3 disabled:opacity-60"
           >
             {isLoading ? 'Saving…' : 'Save profile'}
           </button>
@@ -146,7 +146,7 @@ export default function Profile() {
             )}
             <button
               disabled={passwordState.loading}
-              className="rounded-xl border border-white/15 px-5 py-3 text-sm font-semibold disabled:opacity-60"
+              className="rigora-control border border-white/15 px-5 py-3 text-sm font-semibold disabled:opacity-60"
             >
               {passwordState.loading ? 'Updating…' : 'Change password'}
             </button>

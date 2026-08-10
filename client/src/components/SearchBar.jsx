@@ -4,7 +4,7 @@ export default function SearchBar({ value, onChange, onSubmit }) {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex overflow-hidden rounded-xl border border-white/10 bg-white/5 focus-within:border-cyan-300/50"
+      className="rigora-control flex overflow-hidden border border-white/10 bg-[hsl(var(--rigora-surface))] focus-within:border-cyan-300/50"
     >
       <input
         value={value}

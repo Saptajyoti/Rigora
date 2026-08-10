@@ -1,7 +1,7 @@
 import { money } from '../lib/catalog';
 export default function CartSummary({ totals }) {
   return (
-    <aside className="rounded-2xl border border-white/10 bg-white/5 p-5">
+    <aside className="rigora-glass rounded-xl p-5">
       <h2 className="font-semibold">Order summary</h2>
       <div className="mt-5 flex justify-between text-sm">
         <span className="text-zinc-400">Subtotal</span>

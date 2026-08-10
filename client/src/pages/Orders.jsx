@@ -5,6 +5,7 @@ import SiteHeader from '../components/SiteHeader';
 import EmptyState from '../components/EmptyState';
 import { fetchOrders } from '../store/orderSlice';
 import { money } from '../lib/catalog';
+import PageIntro from '../components/PageIntro';
 export default function Orders() {
   const { orders, loading, error } = useSelector((s) => s.orders);
   const dispatch = useDispatch();
@@ -15,7 +16,11 @@ export default function Orders() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 py-10">
-        <h1 className="text-3xl font-semibold">Your orders</h1>
+        <PageIntro
+          eyebrow="Order archive"
+          title="Your orders"
+          description="Track and revisit every completed Rigora order."
+        />
         {loading ? (
           <p className="mt-8 text-zinc-400">Loading orders…</p>
         ) : error ? (
@@ -33,7 +38,7 @@ export default function Orders() {
               <Link
                 key={order._id}
                 to={`/orders/${order._id}`}
-                className="block rounded-2xl border border-white/10 bg-white/[.04] p-5"
+                className="rigora-panel rigora-panel-interactive block p-5"
               >
                 <div className="flex justify-between gap-5">
                   <div>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 export default function EmptyState({ title, text }) {
   return (
-    <div className="rigora-grid overflow-hidden rounded-2xl border border-dashed border-white/15 p-8 text-center sm:p-12">
+    <div className="rigora-grid rigora-panel overflow-hidden border-dashed p-8 text-center sm:p-12">
       <img
         src="/rigora-empty-state.png"
         alt="Open equipment case with PC hardware"

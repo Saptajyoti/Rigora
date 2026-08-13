@@ -13,6 +13,7 @@
     "start": "npm run start --workspace server",
     "seed": "npm run seed --workspace server",
     "seed:clear": "npm run seed:clear --workspace server",
+    "create-admin": "npm run create-admin --workspace server",
     "lint": "npm run lint --workspaces --if-present",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

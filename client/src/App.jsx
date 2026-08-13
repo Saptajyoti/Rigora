@@ -27,9 +27,11 @@ import AdminOrders from './pages/AdminOrders';
 import MyReviews from './pages/MyReviews';
 import AdminReviews from './pages/AdminReviews';
 import BuildPlanner from './pages/BuildPlanner';
+import AdminLogin from './pages/AdminLogin';
 
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
+import AdminLoginRoute from './components/AdminLoginRoute';
 import PageTransition from './components/PageTransition';
 
 export default function App() {
@@ -74,6 +76,9 @@ export default function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/build-planner" element={<BuildPlanner />} />
+        <Route element={<AdminLoginRoute />}>
+          <Route path="/admin/login" element={<AdminLogin />} />
+        </Route>
 
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
@@ -84,12 +89,11 @@ export default function App() {
           <Route path="/orders/success/:id" element={<OrderSuccess />} />
           <Route path="/orders/failure/:id" element={<OrderFailure />} />
           <Route path="/reviews" element={<MyReviews />} />
-
-          <Route element={<AdminRoute />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/orders" element={<AdminOrders />} />
-            <Route path="/admin/reviews" element={<AdminReviews />} />
-          </Route>
+        </Route>
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
+          <Route path="/admin/reviews" element={<AdminReviews />} />
         </Route>
       </Routes>
     </PageTransition>

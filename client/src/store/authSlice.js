@@ -30,6 +30,18 @@ export const login = createAsyncThunk(
   },
 );
 
+export const adminLogin = createAsyncThunk(
+  'auth/adminLogin',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post('/auth/admin/login', credentials);
+      return data.user;
+    } catch (error) {
+      return rejectWithValue(getErrorMessage(error));
+    }
+  },
+);
+
 export const register = createAsyncThunk(
   'auth/register',
   async (details, { rejectWithValue }) => {
@@ -103,6 +115,7 @@ const authSlice = createSlice({
         (action) =>
           [
             login.pending.type,
+            adminLogin.pending.type,
             register.pending.type,
             updateProfile.pending.type,
             logout.pending.type,
@@ -118,6 +131,7 @@ const authSlice = createSlice({
         (action) =>
           [
             login.fulfilled.type,
+            adminLogin.fulfilled.type,
             register.fulfilled.type,
             updateProfile.fulfilled.type,
           ].includes(action.type),
@@ -132,6 +146,7 @@ const authSlice = createSlice({
         (action) =>
           [
             login.rejected.type,
+            adminLogin.rejected.type,
             register.rejected.type,
             updateProfile.rejected.type,
             logout.rejected.type,

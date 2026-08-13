@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AuthLayout from '../components/AuthLayout';
 import FormField from '../components/FormField';
+import RigoraLogo from '../components/RigoraLogo';
 import { api } from '../lib/api';
 import { logout, updateProfile } from '../store/authSlice';
 import { useState } from 'react';
@@ -46,7 +47,30 @@ export default function Profile() {
     }
   };
   return (
-    <AuthLayout title="Your profile" subtitle="Keep your Rigora account details current.">
+    <AuthLayout
+      title="Your profile"
+      subtitle="Keep your Rigora account details current."
+      aside={
+        <>
+          <Link className="inline-block text-cyan-300" to="/" aria-label="Rigora home">
+            <RigoraLogo />
+          </Link>
+          <div className="mt-14 max-w-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">
+              Your Rigora account
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-100 sm:text-4xl">
+              Keep your build journey in sync.
+            </h2>
+            <p className="mt-5 text-sm leading-6 text-zinc-400 sm:text-base">
+              Manage the details that make your Rigora experience personal, from your
+              profile to your saved hardware decisions.
+            </p>
+          </div>
+          <p className="mt-12 text-sm text-zinc-500">Secure account. Clear control.</p>
+        </>
+      }
+    >
       <div className="mt-7 space-y-8">
         <form
           className="grid gap-4 sm:grid-cols-2"

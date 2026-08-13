@@ -8,6 +8,7 @@
     "start": "node server.js",
     "seed": "node seeds/seed.js",
     "seed:clear": "node seeds/seed.js --clear",
+    "create-admin": "node seeds/createAdmin.js",
     "lint": "eslint ."
   },
   "dependencies": {

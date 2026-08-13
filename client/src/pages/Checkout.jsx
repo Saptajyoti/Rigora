@@ -23,6 +23,27 @@ const blank = {
   country: 'India',
 };
 
+function AddressFields({ title, value, onChange, variants }) {
+  return (
+    <motion.section className="rigora-panel p-5" variants={variants.staggerItem}>
+      <h2 className="font-semibold">{title}</h2>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        {Object.entries(value).map(([name, field]) => (
+          <input
+            key={name}
+            required={name !== 'line2'}
+            name={name}
+            value={field}
+            onChange={onChange}
+            placeholder={name.replace(/([A-Z])/g, ' $1')}
+            className="input invalid:border-rose-400/70 invalid:focus:ring-rose-400/20"
+          />
+        ))}
+      </div>
+    </motion.section>
+  );
+}
+
 export default function Checkout() {
   const [shipping, setShipping] = useState(blank);
   const [billing, setBilling] = useState(blank);
@@ -38,6 +59,8 @@ export default function Checkout() {
   const items = cart?.items || [];
   const setAddress = (setter) => (event) =>
     setter((value) => ({ ...value, [event.target.name]: event.target.value }));
+  const updateShipping = setAddress(setShipping);
+  const updateBilling = setAddress(setBilling);
 
   const submit = async (event) => {
     event.preventDefault();
@@ -98,25 +121,6 @@ export default function Checkout() {
     }
   };
 
-  const AddressFields = ({ title, value, setter }) => (
-    <motion.section className="rigora-panel p-5" variants={variants.staggerItem}>
-      <h2 className="font-semibold">{title}</h2>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        {Object.entries(value).map(([name, field]) => (
-          <input
-            key={name}
-            required={name !== 'line2'}
-            name={name}
-            value={field}
-            onChange={setAddress(setter)}
-            placeholder={name.replace(/([A-Z])/g, ' $1')}
-            className="input invalid:border-rose-400/70 invalid:focus:ring-rose-400/20"
-          />
-        ))}
-      </div>
-    </motion.section>
-  );
-
   if (!items.length)
     return (
       <>
@@ -147,7 +151,8 @@ export default function Checkout() {
             <AddressFields
               title="Shipping address"
               value={shipping}
-              setter={setShipping}
+              onChange={updateShipping}
+              variants={variants}
             />
             <motion.section className="rigora-panel p-5" variants={variants.staggerItem}>
               <label className="flex items-center gap-2">
@@ -174,7 +179,8 @@ export default function Checkout() {
                     <AddressFields
                       title="Billing address"
                       value={billing}
-                      setter={setBilling}
+                      onChange={updateBilling}
+                      variants={variants}
                     />
                   </motion.div>
                 )}

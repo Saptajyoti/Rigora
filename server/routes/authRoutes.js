@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
 import {
+  adminLogin,
   forgotPassword,
   login,
   logout,
@@ -55,6 +56,12 @@ router.post(
   [email, body('password').notEmpty().withMessage('Password is required.')],
   validateRequest,
   login,
+);
+router.post(
+  '/admin/login',
+  [email, body('password').notEmpty().withMessage('Password is required.')],
+  validateRequest,
+  adminLogin,
 );
 router.post('/logout', logout);
 router.get('/me', protect, getCurrentUser);

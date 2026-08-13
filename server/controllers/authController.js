@@ -37,6 +37,20 @@ export const login = asyncHandler(async (request, response) => {
   return sendAuthResponse(response, 200, user);
 });
 
+export const adminLogin = asyncHandler(async (request, response) => {
+  const { email, password } = request.body;
+  const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
+
+  if (!user || !(await user.comparePassword(password))) {
+    return response.status(401).json({ message: 'Invalid email or password.' });
+  }
+  if (user.role !== 'admin') {
+    return response.status(403).json({ message: 'Administrative access is required.' });
+  }
+
+  return sendAuthResponse(response, 200, user);
+});
+
 export function logout(_request, response) {
   clearAuthCookie(response);
   return response.status(200).json({ message: 'Logged out successfully.' });

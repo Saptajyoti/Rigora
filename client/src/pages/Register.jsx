@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthLayout from '../components/AuthLayout';
 import FormField from '../components/FormField';
+import RigoraLogo from '../components/RigoraLogo';
 import { register as registerAccount } from '../store/authSlice';
 
 export default function Register() {
@@ -22,6 +23,28 @@ export default function Register() {
     <AuthLayout
       title="Build your account"
       subtitle="Get access to your Rigora profile and order experience."
+      aside={
+        <>
+          <Link className="inline-block text-cyan-300" to="/" aria-label="Rigora home">
+            <RigoraLogo />
+          </Link>
+          <div className="mt-14 max-w-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">
+              Build with clarity
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-100 sm:text-4xl">
+              Make every component count.
+            </h2>
+            <p className="mt-5 text-sm leading-6 text-zinc-400 sm:text-base">
+              Create your Rigora account to keep compatible hardware, saved choices, and
+              your order experience in one focused place.
+            </p>
+          </div>
+          <p className="mt-12 text-sm text-zinc-500">
+            Built for gamers, creators, and builders.
+          </p>
+        </>
+      }
     >
       <form
         className="mt-7 grid gap-4 sm:grid-cols-2"

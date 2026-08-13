@@ -53,6 +53,7 @@ export function useProducts(filters) {
     pagination: null,
     loading: true,
     error: '',
+    dataKey: '',
   });
   useEffect(() => {
     setState((value) => ({ ...value, loading: true, error: '' }));
@@ -64,6 +65,7 @@ export function useProducts(filters) {
           pagination: data.pagination,
           loading: false,
           error: '',
+          dataKey: filterKey,
         }),
       )
       .catch(() =>
@@ -72,6 +74,7 @@ export function useProducts(filters) {
           pagination: null,
           loading: false,
           error: 'Unable to load products right now.',
+          dataKey: '',
         }),
       );
   }, [filterKey]);

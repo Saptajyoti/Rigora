@@ -1,6 +1,7 @@
 import { Check } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { springs, transitions, withReducedMotion } from '../motion/transitions';
 
 export default function AnimatedAddToCartButton({
   onAdd,
@@ -55,11 +56,7 @@ export default function AnimatedAddToCartButton({
       animate={
         reduceMotion || status !== 'added' ? { scale: 1 } : { scale: [1, 1.025, 1] }
       }
-      transition={
-        reduceMotion
-          ? { duration: 0.01 }
-          : { type: 'spring', stiffness: 420, damping: 28, duration: 0.22 }
-      }
+      transition={withReducedMotion(reduceMotion, springs.confirmation)}
     >
       <AnimatePresence initial={false} mode="wait">
         <motion.span
@@ -67,7 +64,7 @@ export default function AnimatedAddToCartButton({
           initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 3 }}
           animate={{ opacity: 1, y: 0 }}
           exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -3 }}
-          transition={{ duration: reduceMotion ? 0.01 : 0.16 }}
+          transition={withReducedMotion(reduceMotion, transitions.fast)}
           className="flex items-center justify-center gap-2"
         >
           {status === 'added' ? <Check size={18} aria-hidden="true" /> : icon}

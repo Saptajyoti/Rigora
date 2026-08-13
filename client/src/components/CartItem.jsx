@@ -11,6 +11,8 @@ export default function CartItem({ item, onUpdate, onRemove }) {
             src={imageUrl(product.images[0])}
             alt=""
             onError={useImageFallback}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover"
           />
         )}

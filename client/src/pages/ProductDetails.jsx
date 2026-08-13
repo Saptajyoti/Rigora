@@ -1,16 +1,21 @@
-import { Heart, ShoppingCart, ZoomIn } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductGrid from '../components/ProductGrid';
 import SiteHeader from '../components/SiteHeader';
 import { useProducts } from '../hooks/useCatalog';
-import { imageUrl, money, useImageFallback } from '../lib/catalog';
+import { money } from '../lib/catalog';
 import { api } from '../lib/api';
 import { addToCart, toggleWishlist } from '../store/storeSlice';
 import { fetchProductReviews } from '../store/reviewSlice';
 import { RatingSummary, ReviewForm, ReviewList } from '../components/Reviews';
 import AnimatedAddToCartButton from '../components/AnimatedAddToCartButton';
+import AnimatedWishlistButton from '../components/AnimatedWishlistButton';
+import ProductGallery from '../components/ProductGallery';
+import QuantitySelector from '../components/QuantitySelector';
+import { getMotionVariants, viewportOptions } from '../motion/variants';
 
 function DetailSectionHeading({ eyebrow, title }) {
   return (
@@ -21,6 +26,41 @@ function DetailSectionHeading({ eyebrow, title }) {
   );
 }
 
+function ProductDetailsSkeleton() {
+  return (
+    <main className="mx-auto max-w-7xl px-5 py-10" aria-label="Loading product">
+      <div className="rigora-product-skeleton h-4 w-28 rounded" />
+      <div className="mt-6 grid gap-10 lg:grid-cols-2">
+        <div className="rigora-panel overflow-hidden">
+          <div className="rigora-product-skeleton aspect-square" />
+          <div className="mt-3 flex gap-3">
+            <div className="rigora-product-skeleton h-20 w-20 rounded-lg" />
+            <div className="rigora-product-skeleton h-20 w-20 rounded-lg" />
+          </div>
+        </div>
+        <div className="space-y-5">
+          <div className="rigora-product-skeleton h-3 w-28 rounded" />
+          <div className="rigora-product-skeleton h-11 w-5/6 rounded" />
+          <div className="rigora-product-skeleton h-5 w-36 rounded" />
+          <div className="rigora-product-skeleton h-8 w-44 rounded" />
+          <div className="rigora-product-skeleton h-24 w-full rounded-xl" />
+          <div className="flex gap-3">
+            <div className="rigora-product-skeleton h-11 w-28 rounded-lg" />
+            <div className="rigora-product-skeleton h-11 flex-1 rounded-lg" />
+            <div className="rigora-product-skeleton h-11 w-11 rounded-lg" />
+          </div>
+          <div className="rigora-panel space-y-3 p-5">
+            <div className="rigora-product-skeleton h-5 w-32 rounded" />
+            <div className="rigora-product-skeleton h-3 w-full rounded" />
+            <div className="rigora-product-skeleton h-3 w-4/5 rounded" />
+            <div className="rigora-product-skeleton h-3 w-11/12 rounded" />
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
 export default function ProductDetails() {
   const { slug } = useParams();
   const dispatch = useDispatch();
@@ -28,6 +68,9 @@ export default function ProductDetails() {
   const [state, setState] = useState({ product: null, error: '' });
   const [selectedImage, setSelectedImage] = useState(0);
   const [zoomed, setZoomed] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const reduceMotion = useReducedMotion();
+  const variants = getMotionVariants(reduceMotion);
   const [recommendations, setRecommendations] = useState({
     alsoBought: [],
     alsoViewed: [],
@@ -68,6 +111,7 @@ export default function ProductDetails() {
   useEffect(() => {
     setSelectedImage(0);
     setZoomed(false);
+    setQuantity(1);
   }, [slug]);
   useEffect(() => {
     if (!state.product) return;
@@ -96,9 +140,7 @@ export default function ProductDetails() {
     return (
       <>
         <SiteHeader />
-        <main className="mx-auto max-w-7xl px-5 py-16 text-zinc-400">
-          Loading product…
-        </main>
+        <ProductDetailsSkeleton />
       </>
     );
   const { product } = state;
@@ -106,7 +148,7 @@ export default function ProductDetails() {
   const isWishlisted = wishlist.some(
     (item) => item._id === product._id || item.product === product._id,
   );
-  const handleAddToCart = () => dispatch(addToCart({ product })).unwrap();
+  const handleAddToCart = () => dispatch(addToCart({ product, quantity })).unwrap();
   let recentlyViewed = [];
   try {
     recentlyViewed = JSON.parse(localStorage.getItem('rigora_recently_viewed') || '[]')
@@ -119,73 +161,70 @@ export default function ProductDetails() {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-5 py-10">
-        <Link className="text-sm text-cyan-300" to="/products">
-          ← All products
-        </Link>
-        <div className="mt-6 grid gap-10 lg:grid-cols-2">
-          <div>
-            <div className="rigora-panel relative overflow-hidden bg-zinc-950">
-              {images[selectedImage] ? (
-                <img
-                  onClick={() => setZoomed(!zoomed)}
-                  src={imageUrl(images[selectedImage])}
-                  alt={product.name}
-                  onError={useImageFallback}
-                  className={`aspect-square w-full cursor-zoom-in object-cover transition duration-300 ${zoomed ? 'scale-150' : ''}`}
-                />
-              ) : (
-                <div className="grid aspect-square place-items-center text-zinc-600">
-                  Rigora
-                </div>
-              )}
-              <button
-                onClick={() => setZoomed(!zoomed)}
-                aria-label="Toggle image zoom"
-                className="rigora-control absolute bottom-4 right-4 border border-white/15 bg-zinc-950/95 p-3"
-              >
-                <ZoomIn size={18} />
-              </button>
-            </div>
-            {images.length > 1 && (
-              <div className="mt-3 flex gap-3 overflow-auto">
-                {images.map((image, index) => (
-                  <button
-                    key={image}
-                    onClick={() => {
-                      setSelectedImage(index);
-                      setZoomed(false);
-                    }}
-                    className={`rigora-control h-20 w-20 shrink-0 overflow-hidden border ${selectedImage === index ? 'border-cyan-300' : 'border-white/10'}`}
-                  >
-                    <img
-                      src={imageUrl(image)}
-                      alt={`${product.name} ${index + 1}`}
-                      onError={useImageFallback}
-                      className="h-full w-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-          <section>
-            <p className="rigora-kicker">
+        <motion.div initial="hidden" animate="visible" variants={variants.fadeUp}>
+          <Link className="text-sm text-cyan-300" to="/products">
+            ← All products
+          </Link>
+        </motion.div>
+        <motion.div
+          className="mt-6 grid gap-10 lg:grid-cols-2"
+          variants={variants.staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div variants={variants.scaleIn}>
+            <ProductGallery
+              product={product}
+              images={images}
+              selectedImage={selectedImage}
+              onSelectImage={(index) => {
+                setSelectedImage(index);
+                setZoomed(false);
+              }}
+              previewOpen={zoomed}
+              onPreviewChange={setZoomed}
+            />
+          </motion.div>
+          <motion.section
+            variants={variants.staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.p className="rigora-kicker" variants={variants.staggerItem}>
               {product.brand?.name || 'Rigora'}
               {product.category?.name ? ` / ${product.category.name}` : ''}
-            </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight">{product.name}</h1>
-            <p className="mt-5 text-3xl font-semibold">{money(product.price)}</p>
-            <div className="mt-3 flex items-center gap-2 text-sm text-amber-300">
+            </motion.p>
+            <motion.h1
+              className="mt-3 text-4xl font-semibold tracking-tight"
+              variants={variants.staggerItem}
+            >
+              {product.name}
+            </motion.h1>
+            <motion.div
+              className="mt-3 flex items-center gap-2 text-sm text-amber-300"
+              variants={variants.staggerItem}
+            >
               {Number(product.averageRating || 0).toFixed(1)} / 5{' '}
               <span className="text-zinc-400">({product.reviewCount || 0} reviews)</span>
-            </div>
-            {product.compareAtPrice > product.price && (
-              <p className="mt-1 text-zinc-500 line-through">
-                {money(product.compareAtPrice)}
-              </p>
-            )}
-            <p className="mt-7 leading-7 text-zinc-300">{product.description}</p>
-            <div className="rigora-panel mt-6 grid grid-cols-2 divide-x divide-white/10 overflow-hidden text-sm">
+            </motion.div>
+            <motion.div variants={variants.staggerItem}>
+              <p className="mt-5 text-3xl font-semibold">{money(product.price)}</p>
+              {product.compareAtPrice > product.price && (
+                <p className="mt-1 text-zinc-500 line-through">
+                  {money(product.compareAtPrice)}
+                </p>
+              )}
+            </motion.div>
+            <motion.p
+              className="mt-7 leading-7 text-zinc-300"
+              variants={variants.staggerItem}
+            >
+              {product.description}
+            </motion.p>
+            <motion.div
+              className="rigora-panel mt-6 grid grid-cols-2 divide-x divide-white/10 overflow-hidden text-sm"
+              variants={variants.staggerItem}
+            >
               <div className="p-4">
                 <p className="rigora-kicker">Availability</p>
                 <p
@@ -200,38 +239,58 @@ export default function ProductDetails() {
                   {product.sku || 'Not assigned'}
                 </p>
               </div>
-            </div>
-            <div className="mt-6 flex gap-3">
+            </motion.div>
+            <motion.div
+              className="mt-6 flex flex-wrap gap-3"
+              variants={variants.staggerItem}
+            >
+              <QuantitySelector
+                value={quantity}
+                onChange={setQuantity}
+                max={Math.max(1, product.stock)}
+              />
               <AnimatedAddToCartButton
                 disabled={product.stock < 1}
                 onAdd={handleAddToCart}
                 icon={<ShoppingCart size={18} aria-hidden="true" />}
                 className="rigora-primary-action flex flex-1 items-center justify-center gap-2 py-3 disabled:opacity-50"
               />
-              <button
-                onClick={() => dispatch(toggleWishlist(product._id))}
-                aria-label="Toggle wishlist"
+              <AnimatedWishlistButton
+                onToggle={() => dispatch(toggleWishlist(product._id)).unwrap()}
+                isWishlisted={isWishlisted}
+                label={`Toggle ${product.name} in wishlist`}
                 className={`rigora-control border px-4 ${isWishlisted ? 'border-rose-400 text-rose-300' : 'border-white/15'}`}
-              >
-                <Heart fill={isWishlisted ? 'currentColor' : 'none'} />
-              </button>
-            </div>
-            <div className="rigora-panel mt-8 overflow-hidden">
+              />
+            </motion.div>
+            <motion.div
+              className="rigora-panel mt-8 overflow-hidden"
+              variants={variants.staggerItem}
+            >
               <div className="border-b border-white/10 px-5 py-4">
                 <p className="rigora-kicker">Technical reference</p>
                 <h2 className="mt-1 font-semibold">Specifications</h2>
               </div>
-              <dl className="divide-y divide-white/10">
+              <motion.dl
+                className="divide-y divide-white/10"
+                variants={variants.staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOptions}
+              >
                 {Object.entries(product.specifications || {}).map(([key, value]) => (
-                  <div key={key} className="flex justify-between gap-5 px-5 py-3 text-sm">
+                  <motion.div
+                    key={key}
+                    className="flex justify-between gap-5 px-5 py-3 text-sm"
+                    variants={variants.staggerItem}
+                  >
                     <dt className="text-zinc-500">{key}</dt>
                     <dd className="text-right">{value}</dd>
-                  </div>
+                  </motion.div>
                 ))}
-              </dl>
-            </div>
-          </section>
-        </div>
+              </motion.dl>
+            </motion.div>
+          </motion.section>
+        </motion.div>
         <section className="mt-16">
           <DetailSectionHeading
             eyebrow="Recommended for this build"

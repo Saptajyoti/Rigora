@@ -1,7 +1,27 @@
 import { Star, ThumbsUp, Trash2 } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createReview, deleteReview, toggleHelpful } from '../store/reviewSlice';
+import { getMotionVariants, viewportOptions } from '../motion/variants';
+
+function ReviewSkeleton() {
+  return (
+    <div className="rigora-panel space-y-4 p-5" aria-hidden="true">
+      <div className="flex items-start justify-between gap-4">
+        <div className="space-y-2">
+          <div className="rigora-product-skeleton h-5 w-44 rounded" />
+          <div className="rigora-product-skeleton h-3 w-24 rounded" />
+        </div>
+        <div className="rigora-product-skeleton h-4 w-20 rounded" />
+      </div>
+      <div className="space-y-2">
+        <div className="rigora-product-skeleton h-3 w-full rounded" />
+        <div className="rigora-product-skeleton h-3 w-4/5 rounded" />
+      </div>
+    </div>
+  );
+}
 export function StarRating({ value, onChange, label = 'Rating' }) {
   return (
     <div role={onChange ? 'radiogroup' : 'img'} aria-label={label} className="flex gap-1">
@@ -105,16 +125,31 @@ export function ReviewForm({ productId }) {
 }
 export function ReviewList() {
   const dispatch = useDispatch();
+  const reduceMotion = useReducedMotion();
+  const variants = getMotionVariants(reduceMotion);
   const { reviews, loading, error } = useSelector((s) => s.reviews);
   const user = useSelector((s) => s.auth.user);
-  if (loading) return <div className="rigora-panel mt-6 animate-pulse p-12" />;
+  if (loading)
+    return (
+      <div className="mt-6 space-y-4" aria-label="Loading reviews">
+        <ReviewSkeleton />
+        <ReviewSkeleton />
+      </div>
+    );
   if (error) return <p className="mt-6 text-rose-300">{error}</p>;
   if (!reviews.length)
     return <p className="mt-6 text-zinc-400">No approved reviews yet.</p>;
   return (
     <div className="mt-6 space-y-4">
       {reviews.map((review) => (
-        <article key={review._id} className="rigora-panel p-5">
+        <motion.article
+          key={review._id}
+          className="rigora-panel p-5"
+          variants={variants.fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOptions}
+        >
           <div className="flex justify-between gap-4">
             <div>
               <p className="font-semibold">{review.title}</p>
@@ -145,7 +180,7 @@ export function ReviewList() {
               <ThumbsUp size={15} /> Helpful ({review.helpfulUsers?.length || 0})
             </button>
           )}
-        </article>
+        </motion.article>
       ))}
     </div>
   );

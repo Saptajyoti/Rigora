@@ -1,17 +1,38 @@
+import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import SiteHeader from '../components/SiteHeader';
 import EmptyState from '../components/EmptyState';
-import { fetchOrders } from '../store/orderSlice';
-import { money } from '../lib/catalog';
 import PageIntro from '../components/PageIntro';
+import SiteHeader from '../components/SiteHeader';
+import { money } from '../lib/catalog';
+import { getMotionVariants } from '../motion/variants';
+import { fetchOrders } from '../store/orderSlice';
+
+function OrderSkeleton() {
+  return (
+    <div className="rigora-panel p-5">
+      <div className="flex justify-between gap-5">
+        <div className="space-y-3">
+          <div className="rigora-product-skeleton h-4 w-32 rounded" />
+          <div className="rigora-product-skeleton h-3 w-48 rounded" />
+        </div>
+        <div className="rigora-product-skeleton h-5 w-20 rounded" />
+      </div>
+    </div>
+  );
+}
+
 export default function Orders() {
-  const { orders, loading, error } = useSelector((s) => s.orders);
+  const { orders, loading, error } = useSelector((state) => state.orders);
   const dispatch = useDispatch();
+  const reduceMotion = useReducedMotion();
+  const variants = getMotionVariants(reduceMotion);
+
   useEffect(() => {
     dispatch(fetchOrders());
   }, [dispatch]);
+
   return (
     <>
       <SiteHeader />
@@ -22,7 +43,11 @@ export default function Orders() {
           description="Track and revisit every completed Rigora order."
         />
         {loading ? (
-          <p className="mt-8 text-zinc-400">Loading orders…</p>
+          <div className="mt-8 space-y-4" aria-label="Loading orders">
+            <OrderSkeleton />
+            <OrderSkeleton />
+            <OrderSkeleton />
+          </div>
         ) : error ? (
           <p className="mt-8 text-rose-300">{error}</p>
         ) : !orders.length ? (
@@ -33,28 +58,34 @@ export default function Orders() {
             />
           </div>
         ) : (
-          <div className="mt-8 space-y-4">
+          <motion.div
+            className="mt-8 space-y-4"
+            variants={variants.staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
             {orders.map((order) => (
-              <Link
-                key={order._id}
-                to={`/orders/${order._id}`}
-                className="rigora-panel rigora-panel-interactive block p-5"
-              >
-                <div className="flex justify-between gap-5">
-                  <div>
-                    <p className="font-semibold">
-                      Order #{order._id.slice(-8).toUpperCase()}
-                    </p>
-                    <p className="mt-1 text-sm text-zinc-400">
-                      {new Date(order.createdAt).toLocaleDateString()} ·{' '}
-                      {order.orderStatus}
-                    </p>
+              <motion.div key={order._id} variants={variants.staggerItem}>
+                <Link
+                  to={`/orders/${order._id}`}
+                  className="rigora-panel rigora-panel-interactive block p-5"
+                >
+                  <div className="flex justify-between gap-5">
+                    <div>
+                      <p className="font-semibold">
+                        Order #{order._id.slice(-8).toUpperCase()}
+                      </p>
+                      <p className="mt-1 text-sm text-zinc-400">
+                        {new Date(order.createdAt).toLocaleDateString()} ·{' '}
+                        {order.orderStatus}
+                      </p>
+                    </div>
+                    <p className="font-semibold">{money(order.grandTotal)}</p>
                   </div>
-                  <p className="font-semibold">{money(order.grandTotal)}</p>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </main>
     </>

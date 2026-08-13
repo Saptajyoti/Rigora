@@ -31,6 +31,8 @@ export default function Categories() {
                       src={imageUrl(category.image)}
                       alt=""
                       onError={useImageFallback}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition group-hover:scale-105"
                     />
                   )}

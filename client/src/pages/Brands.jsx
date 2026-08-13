@@ -30,6 +30,8 @@ export default function Brands() {
                     src={imageUrl(brand.logo)}
                     alt={`${brand.name} logo`}
                     onError={useImageFallback}
+                    loading="lazy"
+                    decoding="async"
                     className="mb-5 h-10 max-w-32 object-contain object-left"
                   />
                 )}

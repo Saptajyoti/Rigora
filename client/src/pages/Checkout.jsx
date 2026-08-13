@@ -1,13 +1,17 @@
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import SiteHeader from '../components/SiteHeader';
 import CartSummary from '../components/CartSummary';
-import { loadRazorpay } from '../lib/razorpay';
+import PageIntro from '../components/PageIntro';
+import SiteHeader from '../components/SiteHeader';
 import { api } from '../lib/api';
+import { loadRazorpay } from '../lib/razorpay';
+import { getMotionVariants } from '../motion/variants';
 import { checkout, verifyRazorpayPayment } from '../store/orderSlice';
 import { loadStore } from '../store/storeSlice';
-import PageIntro from '../components/PageIntro';
+
 const blank = {
   fullName: '',
   phone: '',
@@ -18,19 +22,23 @@ const blank = {
   postalCode: '',
   country: 'India',
 };
+
 export default function Checkout() {
   const [shipping, setShipping] = useState(blank);
   const [billing, setBilling] = useState(blank);
   const [sameBilling, setSameBilling] = useState(true);
   const [paymentMethod, setPaymentMethod] = useState('razorpay');
-  const { cart, totals } = useSelector((s) => s.store);
-  const { loading, error } = useSelector((s) => s.orders);
-  const user = useSelector((s) => s.auth.user);
+  const { cart, totals } = useSelector((state) => state.store);
+  const { loading, error } = useSelector((state) => state.orders);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const reduceMotion = useReducedMotion();
+  const variants = getMotionVariants(reduceMotion);
   const items = cart?.items || [];
   const setAddress = (setter) => (event) =>
     setter((value) => ({ ...value, [event.target.name]: event.target.value }));
+
   const submit = async (event) => {
     event.preventDefault();
     const payload = {
@@ -89,17 +97,9 @@ export default function Checkout() {
       /* Redux state shows the error. */
     }
   };
-  if (!items.length)
-    return (
-      <>
-        <SiteHeader />
-        <main className="mx-auto max-w-4xl px-5 py-14 text-center text-zinc-400">
-          Your cart is empty.
-        </main>
-      </>
-    );
+
   const AddressFields = ({ title, value, setter }) => (
-    <section className="rigora-panel p-5">
+    <motion.section className="rigora-panel p-5" variants={variants.staggerItem}>
       <h2 className="font-semibold">{title}</h2>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {Object.entries(value).map(([name, field]) => (
@@ -110,12 +110,23 @@ export default function Checkout() {
             value={field}
             onChange={setAddress(setter)}
             placeholder={name.replace(/([A-Z])/g, ' $1')}
-            className="input"
+            className="input invalid:border-rose-400/70 invalid:focus:ring-rose-400/20"
           />
         ))}
       </div>
-    </section>
+    </motion.section>
   );
+
+  if (!items.length)
+    return (
+      <>
+        <SiteHeader />
+        <main className="mx-auto max-w-4xl px-5 py-14 text-center text-zinc-400">
+          Your cart is empty.
+        </main>
+      </>
+    );
+
   return (
     <>
       <SiteHeader />
@@ -125,40 +136,58 @@ export default function Checkout() {
           title="Complete your order"
           description="Your address and payment details are handled securely."
         />
-        <form onSubmit={submit} className="mt-8 grid gap-8 lg:grid-cols-[1fr_340px]">
+        <motion.form
+          onSubmit={submit}
+          className="mt-8 grid gap-8 lg:grid-cols-[1fr_340px]"
+          variants={variants.staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="space-y-6">
             <AddressFields
               title="Shipping address"
               value={shipping}
               setter={setShipping}
-            />{' '}
-            <section className="rigora-panel p-5">
+            />
+            <motion.section className="rigora-panel p-5" variants={variants.staggerItem}>
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   checked={sameBilling}
                   onChange={(event) => setSameBilling(event.target.checked)}
-                />{' '}
+                />
                 Billing address is the same
               </label>
-              {!sameBilling && (
-                <div className="mt-5">
-                  <AddressFields
-                    title="Billing address"
-                    value={billing}
-                    setter={setBilling}
-                  />
-                </div>
-              )}
-            </section>
-            <section className="rigora-panel p-5">
+              <AnimatePresence initial={false} mode="wait">
+                {!sameBilling && (
+                  <motion.div
+                    key="billing-address"
+                    className="mt-5"
+                    initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: -8 }}
+                    transition={{
+                      duration: reduceMotion ? 0.01 : 0.2,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  >
+                    <AddressFields
+                      title="Billing address"
+                      value={billing}
+                      setter={setBilling}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.section>
+            <motion.section className="rigora-panel p-5" variants={variants.staggerItem}>
               <h2 className="font-semibold">Payment method</h2>
               <label className="mt-4 flex gap-3">
                 <input
                   type="radio"
                   checked={paymentMethod === 'razorpay'}
                   onChange={() => setPaymentMethod('razorpay')}
-                />{' '}
+                />
                 Razorpay (UPI, card, net banking)
               </label>
               <label className="mt-3 flex gap-3">
@@ -166,24 +195,44 @@ export default function Checkout() {
                   type="radio"
                   checked={paymentMethod === 'cod'}
                   onChange={() => setPaymentMethod('cod')}
-                />{' '}
+                />
                 Cash on Delivery
               </label>
-            </section>
-            {error && <p className="text-rose-300">{error}</p>}
-            <button
+            </motion.section>
+            {error && (
+              <motion.p className="text-rose-300" variants={variants.staggerItem}>
+                {error}
+              </motion.p>
+            )}
+            <motion.button
+              type="submit"
               disabled={loading}
+              variants={variants.staggerItem}
               className="rigora-primary-action w-full py-3 disabled:opacity-50"
             >
-              {loading
-                ? 'Processing…'
-                : paymentMethod === 'cod'
-                  ? 'Place COD order'
-                  : 'Pay securely'}
-            </button>
+              <AnimatePresence initial={false} mode="wait">
+                <motion.span
+                  key={loading ? 'processing' : paymentMethod}
+                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 3 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: reduceMotion ? 0.01 : 0.14 }}
+                  className="inline-flex items-center justify-center gap-2"
+                >
+                  {loading && <LoaderCircle className="animate-spin" size={17} />}
+                  {loading
+                    ? 'Processing…'
+                    : paymentMethod === 'cod'
+                      ? 'Place COD order'
+                      : 'Pay securely'}
+                </motion.span>
+              </AnimatePresence>
+            </motion.button>
           </div>
-          <CartSummary totals={totals} />
-        </form>
+          <motion.div variants={variants.staggerItem}>
+            <CartSummary totals={totals} />
+          </motion.div>
+        </motion.form>
       </main>
     </>
   );

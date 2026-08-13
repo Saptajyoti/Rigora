@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { getMotionVariants } from '../../motion/variants';
 
 const navigationClass = ({ isActive }) =>
   `transition hover:text-cyan-300 ${isActive ? 'text-cyan-300' : 'text-zinc-300'}`;
@@ -14,6 +15,7 @@ export default function NavPreview({
   triggerClassName = '',
 }) {
   const reduceMotion = useReducedMotion();
+  const variants = getMotionVariants(reduceMotion);
   const [open, setOpen] = useState(false);
   const closeTimer = useRef(null);
   const openTimer = useRef(null);
@@ -88,11 +90,11 @@ export default function NavPreview({
           <motion.div
             role="dialog"
             aria-label={`${label} preview`}
-            className={`rigora-glass rigora-nav-preview absolute top-[calc(100%+0.75rem)] z-50 w-[min(22rem,calc(100vw-2rem))] rounded-2xl p-3 ${positionClass}`}
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -5, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -4, scale: 0.985 }}
-            transition={{ duration: reduceMotion ? 0.01 : 0.18 }}
+            className={`rigora-glass rigora-floating-surface rigora-nav-preview absolute top-[calc(100%+0.75rem)] z-50 w-[min(22rem,calc(100vw-2rem))] rounded-2xl p-3 ${positionClass}`}
+            variants={variants.modal}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             onMouseEnter={() => show()}
             onMouseLeave={hide}
           >

@@ -1,8 +1,14 @@
-export default function FilterSidebar({ categories, brands, filters, onChange }) {
+export default function FilterSidebar({
+  categories,
+  brands,
+  filters,
+  onChange,
+  className = '',
+}) {
   const select = (event) =>
     onChange({ ...filters, [event.target.name]: event.target.value, page: 1 });
   return (
-    <aside className="rigora-glass space-y-5 rounded-xl p-5">
+    <aside className={`rigora-glass space-y-5 rounded-xl p-5 ${className}`}>
       <div>
         <label className="mb-2 block text-sm font-medium">Category</label>
         <select
